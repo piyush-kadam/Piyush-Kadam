@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
-// Placeholder LightRays component
-const LightRays = () => <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/5"></div>;
+// Import your actual LightRays component
+import LightRays from '@/components/LightRays';
 
 export default function WorkExperience() {
   const sectionRef = useRef(null);
@@ -88,7 +88,19 @@ export default function WorkExperience() {
       {/* Intro Section */}
       <section className="min-h-screen bg-black text-white flex items-center px-4 sm:px-6 md:px-10 lg:px-20 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none opacity-40">
-          <LightRays />
+          <LightRays
+            raysOrigin="top-center"
+            raysColor="#ffffff"
+            raysSpeed={1.0}
+            lightSpread={2.7}
+            rayLength={3.5}
+            followMouse={true}
+            mouseInfluence={0.25}
+            noiseAmount={0.15}
+            distortion={0.0}
+            fadeDistance={1.0}
+            saturation={1.0}
+          />
         </div>
 
         <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
