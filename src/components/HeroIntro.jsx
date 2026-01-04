@@ -33,7 +33,7 @@ export default function IntroScreen({ onComplete, children }) {
       <div className="max-w-7xl mx-auto text-center relative w-full h-full flex items-center justify-center">
         {/* PIYUSH - comes from top, LEFT SIDE */}
         <h1 
-          className={`text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black leading-none tracking-tighter text-white transition-all duration-1000 absolute whitespace-nowrap ${
+          className={`text-4xl sm:text-5xl md:text-6xl lg:text-[8rem] font-black leading-none tracking-tighter text-white transition-all duration-1000 absolute whitespace-nowrap ${
             step >= 1 && step < 3 ? 'top-1/2 -translate-y-1/2 left-[23%] -translate-x-1/2 opacity-100' : 
             step === 0 ? '-top-full left-[17%] -translate-x-1/2 opacity-0' :
             step >= 3 && step < 4 ? 'top-1/2 -translate-y-1/2 left-[17%] -translate-x-1/2 opacity-100' :
@@ -45,7 +45,7 @@ export default function IntroScreen({ onComplete, children }) {
         
         {/* KADAM - comes from bottom, RIGHT SIDE */}
         <h2 
-          className={`text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black leading-none tracking-tighter text-white transition-all duration-1000 absolute whitespace-nowrap ${
+          className={`text-4xl sm:text-5xl md:text-6xl lg:text-[8rem] font-black leading-none tracking-tighter text-white transition-all duration-1000 absolute whitespace-nowrap ${
             step >= 2 && step < 3 ? 'top-1/2 -translate-y-1/2 left-[78%] -translate-x-1/2 opacity-100' :
             step < 2 ? 'top-[200%] left-[83%] -translate-x-1/2 opacity-0' :
             step >= 3 && step < 4 ? 'top-1/2 -translate-y-1/2 left-[83%] -translate-x-1/2 opacity-100' :

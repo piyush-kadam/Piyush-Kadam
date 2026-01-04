@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-
-// Placeholder LightRays component
-const LightRays = () => <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/5"></div>;
+import LightRays from '@/components/LightRays';
 
 export default function WorkExperience() {
   const sectionRef = useRef(null);
@@ -84,11 +82,23 @@ export default function WorkExperience() {
   ];
 
   return (
-    <>
+    <div className="overflow-x-hidden">
       {/* Intro Section */}
       <section className="min-h-screen bg-black text-white flex items-center px-4 sm:px-6 md:px-10 lg:px-20 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none opacity-40">
-          <LightRays />
+          <LightRays
+            raysOrigin="top-center"
+            raysColor="#ffffff"
+            raysSpeed={1.0}
+            lightSpread={2.7}
+            rayLength={3.5}
+            followMouse={true}
+            mouseInfluence={0.25}
+            noiseAmount={0.15}
+            distortion={0.0}
+            fadeDistance={1.0}
+            saturation={1.0}
+          />
         </div>
 
         <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
@@ -117,12 +127,12 @@ export default function WorkExperience() {
       </section>
 
       {/* Work Experience Section */}
-      <section ref={sectionRef} className="relative bg-black text-white py-16 md:py-24 lg:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-20">
+      <section ref={sectionRef} className="relative bg-black text-white py-16 md:py-24 lg:py-32 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-20 overflow-hidden">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-16 md:mb-24 text-center">My Journey</h2>
           
           <div className="relative">
-            {/* Vertical Line - Hidden on mobile, shown on md+ */}
+            {/* Desktop: Vertical Line in Center */}
             <div className="hidden md:block absolute left-1/2 top-0 -translate-x-1/2 w-1" style={{ height: "100%" }}>
               <div 
                 className="w-full bg-gradient-to-b from-transparent via-white to-transparent"
@@ -164,7 +174,6 @@ export default function WorkExperience() {
                   >
                     {/* Mobile Layout */}
                     <div className="md:hidden flex gap-6 pl-12">
-                      {/* Dot for mobile */}
                       <div 
                         className="absolute left-2 top-8 flex-shrink-0"
                         style={{
@@ -180,7 +189,6 @@ export default function WorkExperience() {
                         </div>
                       </div>
 
-                      {/* Content */}
                       <div 
                         className="flex-1"
                         style={{
@@ -189,12 +197,13 @@ export default function WorkExperience() {
                           transition: 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
                         }}
                       >
-                        <div className="relative bg-zinc-900/50 backdrop-blur-sm border border-white/20 p-6 rounded-2xl shadow-2xl overflow-hidden mb-6">
+                        <div className="relative bg-zinc-900/50 backdrop-blur-sm border border-white/20 p-6 rounded-2xl shadow-2xl overflow-hidden mb-6 group hover:bg-zinc-800/50 hover:border-white/30 transition-all duration-500">
                           <div className="absolute top-0 left-0 right-0 h-1 bg-white"></div>
+                          <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                           
                           <div className="relative z-10">
                             <div className="flex items-center gap-3 mb-4">
-                              <div className="w-12 h-12 rounded-xl shadow-lg overflow-hidden flex-shrink-0">
+                              <div className="w-12 h-12 rounded-xl shadow-lg overflow-hidden flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
                                 <img src={exp.icon} alt="" className="w-full h-full object-cover" />
                               </div>
                               <h3 className="text-xl sm:text-2xl font-bold text-white">{exp.title}</h3>
@@ -203,15 +212,15 @@ export default function WorkExperience() {
                             <p className="text-gray-400 text-xs sm:text-sm mb-4 font-medium">{exp.period}</p>
                             <p className="text-white/70 text-sm leading-relaxed">{exp.description}</p>
                           </div>
+
+                          <div className="absolute bottom-0 left-0 w-20 h-20 bg-white/5 rounded-tr-full"></div>
                         </div>
 
-                        <div className="relative group">
-                          <img 
-                            src={exp.image}
-                            alt={exp.title}
-                            className="relative w-full shadow-2xl object-contain rounded-lg"
-                          />
-                        </div>
+                        <img 
+                          src={exp.image}
+                          alt={exp.title}
+                          className="w-full shadow-2xl object-contain rounded-lg"
+                        />
                       </div>
                     </div>
 
@@ -273,14 +282,11 @@ export default function WorkExperience() {
                               transitionDelay: '0.2s'
                             }}
                           >
-                            <div className="relative group">
-                              <div className="absolute -inset-2 bg-white/10 rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                              <img 
-                                src={exp.image}
-                                alt={exp.title}
-                                className="relative w-full max-w-sm shadow-2xl object-contain hover:scale-105 transition-transform duration-300 rounded-lg"
-                              />
-                            </div>
+                            <img 
+                              src={exp.image}
+                              alt={exp.title}
+                              className="w-full max-w-sm shadow-2xl object-contain hover:scale-105 transition-transform duration-300 rounded-lg"
+                            />
                           </div>
                         </>
                       ) : (
@@ -294,14 +300,11 @@ export default function WorkExperience() {
                               transitionDelay: '0.2s'
                             }}
                           >
-                            <div className="relative group">
-                              <div className="absolute -inset-2 bg-white/10 rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                              <img 
-                                src={exp.image}
-                                alt={exp.title}
-                                className="relative w-full max-w-sm shadow-2xl object-contain hover:scale-105 transition-transform duration-300 rounded-lg"
-                              />
-                            </div>
+                            <img 
+                              src={exp.image}
+                              alt={exp.title}
+                              className="w-full max-w-sm shadow-2xl object-contain hover:scale-105 transition-transform duration-300 rounded-lg"
+                            />
                           </div>
                           
                           <div 
@@ -360,20 +363,20 @@ export default function WorkExperience() {
       </section>
 
       {/* Skills Section */}
-      <section className="min-h-screen bg-black text-white py-16 md:py-20 px-4 sm:px-6 md:px-10 lg:px-20">
+      <section className="min-h-screen bg-black text-white py-16 md:py-20 px-4 sm:px-6 md:px-10 lg:px-20 overflow-hidden">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-center">Skills & Technologies</h2>
           <p className="text-sm sm:text-base text-gray-400 mb-12 md:mb-16 text-center max-w-2xl mx-auto px-4">
             Technologies and tools I've mastered throughout my journey
           </p>
           
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8">
             {skills.map((skill) => (
               <div 
                 key={skill.name}
                 className="flex flex-col items-center gap-2 sm:gap-3 group"
               >
-                <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-white rounded-lg p-2 sm:p-2.5 md:p-3 transition-transform group-hover:scale-110">
+                <div className="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 bg-white rounded-lg p-2.5 sm:p-3 transition-transform group-hover:scale-110">
                   <img 
                     src={`https://skillicons.dev/icons?i=${skill.icon}`}
                     alt={skill.name}
@@ -386,6 +389,6 @@ export default function WorkExperience() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
