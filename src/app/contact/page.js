@@ -7,20 +7,41 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: ''
+    message: '',
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Handle form submission here
-  };
+  const [status, setStatus] = useState('idle'); // idle | loading | success | error
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('loading');
+
+    try {
+      const res = await fetch('https://formspree.io/f/mjgklaen', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setStatus('error');
+      }
+    } catch (err) {
+      setStatus('error');
+    }
   };
 
   return (
@@ -64,13 +85,15 @@ export default function ContactPage() {
               className="w-full h-full object-cover opacity-90"
             >
               <source src="/contact.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
             </video>
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
           </div>
 
           {/* Form Section */}
-          <div className="bg-zinc-950/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8 lg:h-[400px] flex flex-col">
+          <form
+            onSubmit={handleSubmit}
+            className="bg-zinc-950/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8 lg:h-[400px] flex flex-col"
+          >
             <div className="space-y-4 flex-1 flex flex-col">
               <div>
                 <label className="text-sm text-gray-400 mb-2 block">Your Name</label>
@@ -79,7 +102,8 @@ export default function ContactPage() {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full bg-black/40 border border-white/20 rounded-lg px-4 py-2.5 text-white placeholder:text-gray-600 outline-none focus:border-white/50 transition-all"
+                  required
+                  className="w-full bg-black/40 border border-white/20 rounded-lg px-4 py-2.5 text-white outline-none focus:border-white/50 transition-all"
                 />
               </div>
 
@@ -90,7 +114,8 @@ export default function ContactPage() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full bg-black/40 border border-white/20 rounded-lg px-4 py-2.5 text-white placeholder:text-gray-600 outline-none focus:border-white/50 transition-all"
+                  required
+                  className="w-full bg-black/40 border border-white/20 rounded-lg px-4 py-2.5 text-white outline-none focus:border-white/50 transition-all"
                 />
               </div>
 
@@ -100,19 +125,33 @@ export default function ContactPage() {
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
+                  required
                   placeholder="Tell me about your project..."
-                  className="w-full flex-1 bg-black/40 border border-white/20 rounded-lg px-4 py-2.5 text-white placeholder:text-gray-600 outline-none focus:border-white/50 transition-all resize-none min-h-[80px]"
+                  className="w-full flex-1 bg-black/40 border border-white/20 rounded-lg px-4 py-2.5 text-white outline-none focus:border-white/50 transition-all resize-none"
                 />
               </div>
 
               <button
-                onClick={handleSubmit}
-                className="w-full bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-100 active:scale-[0.98] transition-all"
+                type="submit"
+                disabled={status === 'loading'}
+                className="w-full bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-100 active:scale-[0.98] transition-all disabled:opacity-60"
               >
-                Send Message
+                {status === 'loading' ? 'Sending...' : 'Send Message'}
               </button>
+
+              {status === 'success' && (
+                <p className="text-green-400 text-sm text-center">
+                  Message sent successfully 🚀
+                </p>
+              )}
+
+              {status === 'error' && (
+                <p className="text-red-400 text-sm text-center">
+                  Something went wrong. Try again.
+                </p>
+              )}
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </main>

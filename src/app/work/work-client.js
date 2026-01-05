@@ -5,7 +5,11 @@ export default function SimpleSpacePortfolio() {
   const [videoEnded, setVideoEnded] = useState(false);
   const [muted, setMuted] = useState(true);
   const [isFadingOut, setIsFadingOut] = useState(false);
+  const [activeProject, setActiveProject] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const videoRef = useRef(null);
+  const containerRef = useRef(null);
 
   const projects = [
      {
@@ -57,18 +61,29 @@ export default function SimpleSpacePortfolio() {
 },
   ];
 
-  // ✅ Setup playback rate (slows video down)
+  // Scroll progress tracking
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollTop / docHeight;
+      setScrollProgress(progress);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.75; // slow motion
+      videoRef.current.playbackRate = 0.75;
     }
   }, []);
 
   const handleVideoEnd = () => {
-    setIsFadingOut(true); // trigger fade-out
+    setIsFadingOut(true);
     setTimeout(() => {
-      setVideoEnded(true); // remove video after transition
-    }, 1200); // match fade-out duration
+      setVideoEnded(true);
+    }, 1200);
   };
 
   const toggleMute = () => {
@@ -86,8 +101,16 @@ export default function SimpleSpacePortfolio() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white relative">
-      {/* ✅ Intro Video Overlay with fade in/out */}
+    <div ref={containerRef} className="min-h-screen bg-black text-white relative overflow-hidden">
+      {/* Scroll Progress Bar */}
+      <div className="fixed top-0 left-0 w-full h-0.5 bg-white/5 z-[60]">
+        <div 
+          className="h-full bg-white transition-all duration-300"
+          style={{ width: `${scrollProgress * 100}%` }}
+        />
+      </div>
+
+      {/* Intro Video */}
       {!videoEnded && (
         <div
           className={`fixed inset-0 z-50 flex items-center justify-center bg-black transition-opacity duration-1000 ${
@@ -102,7 +125,6 @@ export default function SimpleSpacePortfolio() {
             className="w-full h-full object-cover fade-in"
             onEnded={handleVideoEnd}
           />
-          {/* Controls */}
           <div className="absolute bottom-6 right-6 flex gap-3">
             <button
               onClick={toggleMute}
@@ -120,63 +142,116 @@ export default function SimpleSpacePortfolio() {
         </div>
       )}
 
-      {/* ✅ Portfolio Content */}
+      {/* Portfolio Content */}
       <div className="w-full min-h-screen relative">
+        {/* Background */}
         <div className="fixed inset-0 z-0">
           <div className="absolute inset-0 bg-black"></div>
           <div className="stars"></div>
+          <div className="shooting-stars"></div>
         </div>
 
-        <div className="relative z-20 pt-32 pb-16">
+        <div className="relative z-20 pt-20 pb-16">
           {/* Header */}
-          <div className="text-center mb-20">
-            <h1 className="text-6xl md:text-8xl font-black mb-4 tracking-wider">PORTFOLIO</h1>
-            <div className="text-lg tracking-[0.3em] text-gray-400 font-light">DIGITAL ARCHITECT</div>
+          <div className="text-center mb-24 px-6">
+            <div className="inline-block">
+              <h1 className="text-8xl md:text-9xl font-black mb-3 tracking-wider">
+                PORTFOLIO
+              </h1>
+              <div className="flex items-center justify-center gap-4 text-sm tracking-[0.5em] text-gray-400 font-light">
+                <span className="w-12 h-px bg-white/20"></span>
+                <span>DIGITAL ARCHITECT</span>
+                <span className="w-12 h-px bg-white/20"></span>
+              </div>
+            </div>
           </div>
 
-          {/* Projects List */}
-          <div className="max-w-7xl mx-auto px-6 space-y-32">
+          {/* Projects - Horizontal Scroll Layout */}
+          <div className="space-y-32 px-6">
             {projects.map((project, index) => (
-              <div key={project.name} className="project-section">
-                {/* Project Header */}
-                <div className="project-header mb-12">
-                  <div className="titlebar flex items-baseline justify-between mb-4">
-                    <h2 className="project-title">{project.name}</h2>
-                    <span className="project-year">{project.year}</span>
-                  </div>
-                  <p className="project-description">{project.description}</p>
-                  <p className="project-details">{project.details}</p>
-                </div>
-
-                {/* Project Content */}
-                <div className="project-content">
-                  {/* Main App Image */}
-                  <div className="main-app-display mb-16">
-                    <div className="app-container">
-                      <div className="app-frame">
-                        <img src={project.mainImage} alt={project.name} className="app-image" />
+              <div 
+                key={project.name} 
+                className="project-section max-w-[1600px] mx-auto"
+                onMouseEnter={() => setActiveProject(index)}
+                onMouseLeave={() => setActiveProject(null)}
+              >
+                {/* Project Info Sidebar + Main Content */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+                  {/* Left Sidebar - Project Info */}
+                  <div className="lg:col-span-3 space-y-8">
+                    <div>
+                      <div className="text-xs tracking-[0.3em] text-gray-600 mb-2 font-mono">
+                        {String(index + 1).padStart(2, '0')}
                       </div>
-                      <div className="app-label">APPLICATION</div>
+                      <h2 className="text-5xl lg:text-6xl font-black mb-4 leading-none">
+                        {project.name}
+                      </h2>
+                      <div className="text-xs tracking-[0.3em] text-gray-400 mb-6">
+                        {project.description}
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-3">
+                        <span className="w-px h-12 bg-white/30"></span>
+                        <div>
+                          <div className="text-xs text-gray-500 mb-1">YEAR</div>
+                          <div className="text-sm font-bold">{project.year}</div>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-start gap-3">
+                        <span className="w-px h-24 bg-white/30"></span>
+                        <div>
+                          <div className="text-xs text-gray-500 mb-2">DETAILS</div>
+                          <p className="text-sm text-gray-300 leading-relaxed">
+                            {project.details}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
-                  {/* App Screenshots */}
-                  <div className="screenshots-section">
-                    <div className="section-label mb-8">
-                      APP SCREENSHOTS • {project.images.length} IMAGES
+                  {/* Right Content - Images */}
+                  <div className="lg:col-span-9 space-y-16">
+                    {/* Featured Image */}
+                    <div 
+                      className="featured-container group cursor-pointer max-w-2xl mx-auto"
+                      onClick={() => setSelectedImage({ project: index, image: project.mainImage })}
+                    >
+                      <div className="relative overflow-hidden bg-white/5 border border-white/10 transition-all duration-500 group-hover:border-white/30">
+                        <img 
+                          src={project.mainImage} 
+                          alt={project.name}
+                          className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500"></div>
+                      </div>
+                      <div className="text-xs text-gray-500 mt-3 text-center tracking-wider">FEATURED</div>
                     </div>
-                    <div className="screenshots-grid">
-                      {project.images.map((imageSrc, imgIndex) => (
-                        <div key={imgIndex} className="screenshot-item">
-                          <div className="screenshot-frame">
-                            <img
-                              src={imageSrc}
-                              alt={`${project.name} screenshot ${imgIndex + 1}`}
-                              className="screenshot-image"
+
+                    {/* Image Grid */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                      {project.images.map((img, imgIndex) => (
+                        <div 
+                          key={imgIndex}
+                          className="screenshot-container group cursor-pointer"
+                          onClick={() => setSelectedImage({ project: index, image: img, index: imgIndex })}
+                        >
+                          <div className="relative overflow-hidden bg-white/5 border border-white/10 aspect-[9/19.5] transition-all duration-300 group-hover:border-white/30">
+                            <img 
+                              src={img}
+                              alt={`${project.name} ${imgIndex + 1}`}
+                              className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
                             />
+                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
+                              <span className="opacity-0 group-hover:opacity-100 text-white text-xs tracking-wider transition-opacity duration-300">
+                                VIEW
+                              </span>
+                            </div>
                           </div>
-                          <div className="screenshot-number">
-                            {String(imgIndex + 1).padStart(2, "0")}
+                          <div className="text-[10px] text-gray-600 mt-2 text-center font-mono">
+                            {String(imgIndex + 1).padStart(2, '0')}
                           </div>
                         </div>
                       ))}
@@ -186,8 +261,10 @@ export default function SimpleSpacePortfolio() {
 
                 {/* Divider */}
                 {index < projects.length - 1 && (
-                  <div className="project-divider">
-                    <div className="divider-line"></div>
+                  <div className="mt-32 flex items-center justify-center gap-4">
+                    <span className="w-32 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></span>
+                    <span className="w-1 h-1 bg-white/50 rounded-full"></span>
+                    <span className="w-32 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></span>
                   </div>
                 )}
               </div>
@@ -195,77 +272,151 @@ export default function SimpleSpacePortfolio() {
           </div>
 
           {/* Footer */}
-          <div className="text-center mt-40">
-            <div className="text-4xl font-black mb-4">PORTFOLIO</div>
-            <div className="text-sm tracking-widest text-gray-500">PORTFOLIO • 2025 • SPACE</div>
+          <div className="text-center mt-40 mb-16 px-6">
+            <div className="inline-block space-y-4">
+              <div className="text-5xl font-black tracking-wider">PORTFOLIO</div>
+              <div className="flex items-center gap-3 text-xs tracking-[0.4em] text-gray-600">
+                <span className="w-8 h-px bg-white/20"></span>
+                <span>2025</span>
+                <span className="w-8 h-px bg-white/20"></span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* ⭐ Styles */}
+      {/* Lightbox Modal */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 z-[70] bg-black/95 flex items-center justify-center p-6"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button 
+            className="absolute top-6 right-6 text-white text-4xl hover:text-gray-400 transition"
+            onClick={() => setSelectedImage(null)}
+          >
+            ×
+          </button>
+          <img 
+            src={selectedImage.image}
+            alt="Full view"
+            className="max-w-full max-h-full object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+
+      {/* Styles */}
       <style jsx>{`
-        :global(html), :global(body) { overflow-x: hidden; }
+        :global(html), :global(body) { 
+          overflow-x: hidden;
+          scroll-behavior: smooth;
+        }
+        
         .fade-in {
           animation: fadeIn 1.5s ease-in forwards;
         }
+        
         @keyframes fadeIn {
           from { opacity: 0; }
           to { opacity: 1; }
         }
+        
+        /* Space background */
         .stars {
           position: absolute;
           width: 100%;
           height: 100%;
           background-image: 
-            radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.2), transparent),
-            radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.2), transparent),
+            radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.3), transparent),
+            radial-gradient(1px 1px at 60px 70px, rgba(255,255,255,0.2), transparent),
             radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.2), transparent),
-            radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.2), transparent),
-            radial-gradient(1px 1px at 160px 30px, rgba(255,255,255,0.2), transparent);
+            radial-gradient(2px 2px at 130px 80px, rgba(255,255,255,0.3), transparent),
+            radial-gradient(1px 1px at 160px 120px, rgba(255,255,255,0.2), transparent);
           background-repeat: repeat;
-          background-size: 200px 100px;
-          opacity: 0.3;
+          background-size: 200px 150px;
+          opacity: 0.4;
+          animation: twinkle 4s ease-in-out infinite;
         }
-        .project-section { position: relative; }
-        .project-header { text-align: left; max-width: 600px; }
-        .project-title { font-size: 4rem; font-weight: 900; letter-spacing: 0.05em; margin: 0; }
-        .project-year { font-size: 1.2rem; color: #666; font-weight: 600; }
-        .project-description { font-size: 14px; color: #888; font-weight: 600; letter-spacing: 0.2em; margin: 8px 0; }
-        .project-details { font-size: 18px; color: #ccc; line-height: 1.5; margin: 0; }
-        .main-app-display { display: flex; justify-content: center; }
-        .app-container { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-        .app-frame { width: 700px; height: 500px; border: 2px solid rgba(255,255,255,0.2); border-radius: 16px; overflow: hidden; background: rgba(255,255,255,0.02); display: flex; align-items: center; justify-content: center; padding: 24px; }
-        .app-image { max-width: 100%; max-height: 100%; object-fit: contain; filter: contrast(1.1); }
-        .app-label { font-size: 14px; color: #666; font-weight: 600; letter-spacing: 0.15em; }
-        .screenshots-section { margin-top: 80px; }
-        .section-label { font-size: 13px; color: #888; font-weight: 700; letter-spacing: 0.2em; text-align: center; }
-        .screenshots-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; justify-items: center; }
-        .screenshot-item { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; }
-        .screenshot-frame { width: 240px; height: 420px; border: 1px solid rgba(255,255,255,0.3); border-radius: 10px; overflow: hidden; background: rgba(255,255,255,0.01); display: flex; align-items: center; justify-content: center; padding: 16px; transition: all 0.3s ease; margin: 0 auto; margin-right: 20px; }
-        .screenshot-image { max-width: 100%; max-height: 100%; object-fit: contain; filter: grayscale(0.1) contrast(1.1); transition: filter 0.3s ease; }
-        .screenshot-frame:hover { border-color: rgba(255,255,255,0.5); transform: translateY(-6px); }
-        .screenshot-frame:hover .screenshot-image { filter: grayscale(0) contrast(1.2); }
-        .screenshot-number { font-size: 12px; color: #666; font-weight: 600; background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 4px; }
-        .project-divider { margin-top: 100px; display: flex; justify-content: center; }
-        .divider-line { width: 220px; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); }
+        
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 0.5; }
+        }
+        
+        .shooting-stars {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+        }
+        
+        .shooting-stars::before,
+        .shooting-stars::after {
+          content: '';
+          position: absolute;
+          width: 2px;
+          height: 2px;
+          background: white;
+          border-radius: 50%;
+          box-shadow: 0 0 10px 2px rgba(255,255,255,0.5);
+          animation: shoot 4s linear infinite;
+        }
+        
+        .shooting-stars::before {
+          top: 20%;
+          left: 10%;
+          animation-delay: 0s;
+        }
+        
+        .shooting-stars::after {
+          top: 60%;
+          left: 80%;
+          animation-delay: 2s;
+        }
+        
+        @keyframes shoot {
+          0% {
+            transform: translate(0, 0) rotate(-45deg);
+            opacity: 1;
+          }
+          100% {
+            transform: translate(400px, 400px) rotate(-45deg);
+            opacity: 0;
+          }
+        }
+        
+        .project-section {
+          opacity: 0;
+          animation: slideUp 0.8s ease-out forwards;
+        }
+        
+        @keyframes slideUp {
+          from { 
+            opacity: 0;
+            transform: translateY(40px);
+          }
+          to { 
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        /* Responsive */
+        @media (max-width: 1023px) {
+          .project-section {
+            padding: 0 1rem;
+          }
+        }
+        
         @media (max-width: 640px) {
-          .project-header { text-align: center; margin-left: auto; margin-right: auto; max-width: 90vw; }
-          .titlebar { flex-direction: column; align-items: center; gap: 6px; }
-          .project-title { font-size: 2.25rem; line-height: 1.1; }
-          .project-year { font-size: 1rem; }
-          .main-app-display { justify-content: center; }
-          .app-frame { width: min(92vw, 360px); height: auto; aspect-ratio: 4 / 3; padding: 12px; margin: 0 auto; }
-          .screenshots-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; width: 100%; }
-          .screenshot-item { width: 100%; align-items: center; }
-          .screenshot-frame { width: 100%; aspect-ratio: 9 / 16; height: auto; padding: 6px; }
-          .section-label { text-align: center; }
-          .project-divider { margin-top: 60px; }
-        }
-        @media (min-width: 641px) and (max-width: 1023px) {
-          .project-header { max-width: 90vw; }
-          .app-frame { width: 90vw; height: auto; aspect-ratio: 4 / 3; }
-          .screenshots-grid { grid-template-columns: repeat(2, 1fr); justify-items: center; }
-          .screenshot-frame { width: 280px; height: auto; aspect-ratio: 9 / 16; }
+          h1 {
+            font-size: 3rem;
+          }
+          
+          h2 {
+            font-size: 2.5rem;
+          }
         }
       `}</style>
     </div>
