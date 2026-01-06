@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Piyush Kadam - Portfolio",
+  title: "Piyush Kadam | Portfolio",
 };
 
 import WorkClient from "./work-client";

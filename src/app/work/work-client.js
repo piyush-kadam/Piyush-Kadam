@@ -76,23 +76,29 @@ export default function SimpleSpacePortfolio() {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
+      if (!images || images.length === 0) return;
+      
       const interval = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % images.length);
+        setCurrentIndex((prev) => {
+          const nextIndex = (prev + 1) % images.length;
+          console.log('Changing to image:', nextIndex, images[nextIndex]); // Debug log
+          return nextIndex;
+        });
       }, 2000); // Change image every 2 seconds
 
       return () => clearInterval(interval);
-    }, [images.length]);
+    }, [images]);
+
+    if (!images || images.length === 0) return null;
 
     return (
       <div className="slideshow-container">
-        {images.map((img, idx) => (
-          <img
-            key={idx}
-            src={img}
-            alt={`Slide ${idx + 1}`}
-            className={`slideshow-image ${idx === currentIndex ? 'active' : ''}`}
-          />
-        ))}
+        <img
+          src={images[currentIndex]}
+          alt={`Slide ${currentIndex + 1}`}
+          className="slideshow-image-single"
+          key={currentIndex}
+        />
       </div>
     );
   };
@@ -316,19 +322,18 @@ export default function SimpleSpacePortfolio() {
           position: relative;
           overflow: hidden;
           border-radius: 8px;
+          background: rgba(0,0,0,0.3);
         }
-        .slideshow-image {
-          position: absolute;
-          top: 0;
-          left: 0;
+        .slideshow-image-single {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          opacity: 0;
-          transition: opacity 0.8s ease-in-out;
+          animation: fadeIn 0.5s ease-in;
         }
-        .slideshow-image.active {
-          opacity: 1;
+        
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
         }
 
         .project-section { position: relative; }
