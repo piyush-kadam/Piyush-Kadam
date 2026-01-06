@@ -11,8 +11,8 @@ export default function SimpleSpacePortfolio() {
      {
       name: "POTATOBOOK",
       mainImage: "/potatobook.png",
-      video: "/potatobook.mp4",
-      images: ["/p1.png","/p2.png","/p3.jpg","/p4.jpg","/p5.jpg"],
+      video: "/potato.mp4",
+      images: ["/p1.png","/p2.png","/p3.jpg","/p4.jpg","/p5.jpg","/p6.jpg","/p7.jpg","/p8.jpg"],
       description: "AN EXPENSE MANAGEMENT PLATFORM",
       details: "This APP was made for Rachitroo famous YT creator while working as an intern for 7SEERS media",
       year: "2025",
