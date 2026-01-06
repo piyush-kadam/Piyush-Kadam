@@ -41,45 +41,58 @@ export default function WorkExperience() {
 
   const experiences = [
     {
-      title: "The Beginning",
-      role: "First Steps into Development",
-      period: "2020 - 2021",
-      description: "Started my journey learning Flutter and mobile development. Built my first apps and discovered my passion for creating user experiences.",
-      image: "/polo.png",
+      title: "AppliedPlus",
+      role: "Flutter Developer Intern",
+      period: "March 2025 - July 2025",
+      description: " Developed a job search app in which jobs from all over the web would be available and built a custom automation API using Python, Flask, and Selenium.This API was designed to automate job applications on platforms like IIMJobs",
+      image: "/polo2.png",
       icon: "https://skillicons.dev/icons?i=flutter"
     },
     {
-      title: "Growth & Learning",
-      role: "Expanding Horizons",
-      period: "2021 - 2022",
-      description: "Dove deeper into Firebase, Node.js, and backend technologies. Started working on real-world projects and collaborating with teams.",
+      title: "7Seers Media",
+      role: "Lead Flutter Developer",
+      period: "August 2025 - Jan 2026",
+      description: "Dove deeper into Firebase, Node.js, and backend technologies. Started working on real-world projects and collaborating with teams.Learned to build native widgets, work on complicated UI and databases and cross platform applications using Flutter, and implemented IN-APP subscription , Apple Sign-in authentication , otp verification and many more.",
       image: "/polo1.png",
       icon: "https://skillicons.dev/icons?i=firebase"
     },
-    {
-      title: "Professional Impact",
-      role: "Building Products",
-      period: "2022 - Present",
-      description: "Creating production-ready applications with modern tech stack. Focusing on scalable solutions and delivering value to users.",
-      image: "/polo2.png",
-      icon: "https://skillicons.dev/icons?i=flutter"
-    }
+   {
+  title: "WorkState",
+  role: "Founder",
+  roleLink: "https://workstate.in",
+  period: "September 2025 - Present",
+  description:
+    "Founder of a Digital Media Agency creating production-ready applications with a modern tech stack. Focused on scalable solutions and delivering value to clients through creative and innovative ideas.",
+  image: "/polo.png",
+  icon: "https://skillicons.dev/icons?i=vercel"
+}
+
   ];
 
-  const skills = [
-    { name: "Flutter", icon: "flutter" },
-    { name: "Firebase", icon: "firebase" },
-    { name: "Node.js", icon: "nodejs" },
-    { name: "React", icon: "react" },
-    { name: "Next.js", icon: "nextjs" },
-    { name: "MongoDB", icon: "mongodb" },
-    { name: "Figma", icon: "figma" },
-    { name: "Git", icon: "git" },
-    { name: "JavaScript", icon: "javascript" },
-    { name: "TypeScript", icon: "typescript" },
-    { name: "TailwindCSS", icon: "tailwindcss" },
-    { name: "Docker", icon: "docker" }
-  ];
+const skills = [
+  { name: "Flutter", icon: "flutter" },
+  { name: "Firebase", icon: "firebase" },
+  { name: "Supabase", icon: "supabase" },
+  { name: "MongoDB", icon: "mongodb" },
+
+  { name: "Android", icon: "androidstudio" },
+  { name: "iOS", icon: "apple" },
+
+  { name: "JavaScript", icon: "javascript" },
+  { name: "Next.js", icon: "nextjs" },
+  { name: "Node.js", icon: "nodejs" },
+  { name: "UI/UX Design", icon: "figma" },
+  { name: "REST APIs", icon: "postman" },
+  { name: "Android Studio", icon: "androidstudio" },
+  { name: "Dart", icon: "dart" },
+  { name: "SQL", icon: "mysql" },
+  { name: "Python", icon: "python" },
+  { name: "C++", icon: "cpp" },
+  { name: "Git", icon: "git" },
+  { name: "GitHub", icon: "github" }
+];
+
+
 
   return (
     <div className="overflow-x-hidden">
@@ -248,7 +261,23 @@ export default function WorkExperience() {
                                   </div>
                                   <h3 className="text-2xl lg:text-3xl font-bold text-white">{exp.title}</h3>
                                 </div>
-                                <p className="text-white/90 font-semibold mb-2 text-base lg:text-lg">{exp.role}</p>
+                               <p className="text-white/90 font-semibold mb-2 text-base">
+  {exp.role}
+  {exp.roleLink && (
+    <>
+      {" · "}
+      <a
+        href={exp.roleLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-white hover:underline"
+      >
+        workstate.in
+      </a>
+    </>
+  )}
+</p>
+
                                 <p className="text-gray-400 text-xs lg:text-sm mb-4 lg:mb-5 font-medium">{exp.period}</p>
                                 <p className="text-white/70 text-sm leading-relaxed">{exp.description}</p>
                               </div>
