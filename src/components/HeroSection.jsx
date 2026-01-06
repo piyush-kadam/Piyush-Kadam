@@ -123,11 +123,17 @@ const skills = [
             <p className="text-sm sm:text-base md:text-lg text-gray-400 mb-6 md:mb-8 leading-relaxed">
               I'm a Flutter Developer skilled in building high-performance, multi-platform apps with clean UI, scalable architecture, and seamless integrations.
             </p>
-            <div className="flex gap-4">
-              <button className="bg-white hover:bg-gray-100 text-black font-bold px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base rounded-lg transition-all transform hover:scale-105">
-                Check My Resume
-              </button>
-            </div>
+           <a
+  href="/resume.pdf"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-block"
+>
+  <button className="bg-white hover:bg-gray-100 text-black font-bold px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base rounded-lg transition-all transform hover:scale-105">
+    Check My Resume
+  </button>
+</a>
+
           </div>
           <div className="flex justify-center lg:justify-end mt-8 lg:mt-0">
             <img 

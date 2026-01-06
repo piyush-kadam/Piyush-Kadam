@@ -9,37 +9,21 @@ export default function SimpleSpacePortfolio() {
 
   const projects = [
      {
-      name: "SHOEHIVE",
-      mainImage: "/shoehive.png",
-      video: "/shoehive.mp4",
-      images: ["/s1.jpeg","/s2.jpeg","/s3.jpeg","/s4.jpeg","/s5.jpeg","/s6.jpeg","/s7.jpeg","/s8.jpeg"],
-      description: "PREMIUM SHOE MARKETPLACE",
-      details: "Next-generation shopping experience with premium shoe collections",
+      name: "POTATOBOOK",
+      mainImage: "/potatobook.png",
+      video: "/potatobook.mp4",
+      images: ["/p1.png","/p2.png","/p3.jpg","/p4.jpg","/p5.jpg","/p6.png","/p7.png","/p8.png"],
+      description: "AN EXPENSE MANAGEMENT PLATFORM",
+      details: "This APP was made for Rachitroo famous YT creator while working as an intern for 7SEERS media",
       year: "2025",
       techStack: {
         framework: "Flutter & Firebase",
         database: "Firebase Firestore",
-        auth: "Gmail",
-        technologies: ""
+        auth: "Gmail, OTP Auth, Google Sign In, Apple Sign In",
+        technologies: "In-App Subscription , Push Notifications"
       }
     },
-    {
-      name: "TIXOO",
-      mainImage: "/tixoo.png",
-      video: "/tixoo.mp4",
-      images: ["/t1.jpeg","/t2.jpeg","/t3.jpeg","/t4.jpeg","/t5.jpeg","/t6.jpeg","/t7.jpeg","/t8.jpeg"],
-      description: "EVENT MANAGEMENT PLATFORM",
-      details: "This App is a property of 7SEERS media , it is designed and being developed by piyush kadam working as an intern for Tixoo",
-      year: "2025",
-      techStack: {
-        framework: "Flutter & Firebase",
-        database: "Firebase Firestore",
-        auth: "Gmail, Google Sign In, OTP Verification",
-        technologies: "Seats.io, Razorpay , Push Notifications"
-      }
-    },
-   
-    {
+     {
       name: "APPLIEDPLUS",
       mainImage: "/appliedplus.png",
       video: "/appliedplus.mp4",
@@ -54,36 +38,76 @@ export default function SimpleSpacePortfolio() {
         technologies: "Selenium, REST APIs"
       }
     },
+    
     {
-      name: "POTATOBOOK",
-      mainImage: "/potatobook.png",
-      video: "/potatobook.mp4",
-      images: ["/p1.jpeg","/p2.jpeg","/p3.jpeg","/p4.jpeg","/p5.jpeg","/p6.jpeg","/p7.jpeg","/p8.jpeg"],
-      description: "SOCIAL MEDIA PLATFORM",
-      details: "Modern social networking platform connecting people through shared interests and experiences",
+      name: "TERRAN",
+      mainImage: "/tixoo.png",
+      video: null, // No video for this project
+      images: ["/t1.jpeg","/t2.jpeg","/t3.jpeg","/t4.jpeg","/t5.jpeg","/t6.jpeg","/t7.jpeg","/t8.jpeg"],
+      description: "EVENT MANAGEMENT PLATFORM",
+      details: "This App is a property of 7SEERS media , it is developed by piyush kadam working as an intern.",
       year: "2025",
       techStack: {
         framework: "Flutter & Firebase",
         database: "Firebase Firestore",
-        auth: "Gmail, OTP Auth, Google Sign In, Apple Sign In",
-        technologies: "In-App Subscription , Push Notifications"
+        auth: "Gmail, Google Sign In, OTP Verification",
+        technologies: "Seats.io, Razorpay , Push Notifications"
       }
     },
-  
+    {
+      name: "SHOEHIVE",
+      mainImage: "/shoehive.png",
+      video: "/shoehive.mp4",
+      images: ["/s1.jpeg","/s2.jpeg","/s3.jpeg","/s4.jpeg","/s5.jpeg","/s6.jpeg","/s7.jpeg","/s8.jpeg"],
+      description: "PREMIUM SHOE MARKETPLACE",
+      details: "Next-generation shopping experience with premium shoe collections",
+      year: "2025",
+      techStack: {
+        framework: "Flutter & Firebase",
+        database: "Firebase Firestore",
+        auth: "Gmail",
+        technologies: ""
+      }
+    },
   ];
 
-  // ✅ Setup playback rate (slows video down)
+  // Image Slideshow Component
+  const ImageSlideshow = ({ images }) => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % images.length);
+      }, 2000); // Change image every 2 seconds
+
+      return () => clearInterval(interval);
+    }, [images.length]);
+
+    return (
+      <div className="slideshow-container">
+        {images.map((img, idx) => (
+          <img
+            key={idx}
+            src={img}
+            alt={`Slide ${idx + 1}`}
+            className={`slideshow-image ${idx === currentIndex ? 'active' : ''}`}
+          />
+        ))}
+      </div>
+    );
+  };
+
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.75; // slow motion
+      videoRef.current.playbackRate = 0.75;
     }
   }, []);
 
   const handleVideoEnd = () => {
-    setIsFadingOut(true); // trigger fade-out
+    setIsFadingOut(true);
     setTimeout(() => {
-      setVideoEnded(true); // remove video after transition
-    }, 1200); // match fade-out duration
+      setVideoEnded(true);
+    }, 1200);
   };
 
   const toggleMute = () => {
@@ -102,7 +126,6 @@ export default function SimpleSpacePortfolio() {
 
   return (
     <div className="min-h-screen bg-black text-white relative">
-      {/* ✅ Intro Video Overlay with fade in/out */}
       {!videoEnded && (
         <div
           className={`fixed inset-0 z-50 flex items-center justify-center bg-black transition-opacity duration-1000 ${
@@ -117,7 +140,6 @@ export default function SimpleSpacePortfolio() {
             className="w-full h-full object-cover fade-in"
             onEnded={handleVideoEnd}
           />
-          {/* Controls */}
           <div className="absolute bottom-6 right-6 flex gap-3">
             <button
               onClick={toggleMute}
@@ -135,7 +157,6 @@ export default function SimpleSpacePortfolio() {
         </div>
       )}
 
-      {/* ✅ Portfolio Content */}
       <div className="w-full min-h-screen relative">
         <div className="fixed inset-0 z-0">
           <div className="absolute inset-0 bg-black"></div>
@@ -143,17 +164,14 @@ export default function SimpleSpacePortfolio() {
         </div>
 
         <div className="relative z-20 pt-32 pb-16">
-          {/* Header */}
           <div className="text-center mb-20">
             <h1 className="text-6xl md:text-8xl font-black mb-4 tracking-wider">PORTFOLIO</h1>
             <div className="text-lg tracking-[0.3em] text-gray-400 font-light">DIGITAL ARCHITECT</div>
           </div>
 
-          {/* Projects List */}
           <div className="max-w-7xl mx-auto px-6 space-y-32">
             {projects.map((project, index) => (
               <div key={project.name} className="project-section">
-                {/* Project Header */}
                 <div className="project-header mb-12">
                   <div className="titlebar flex items-baseline justify-between mb-4">
                     <h2 className="project-title">{project.name}</h2>
@@ -163,15 +181,13 @@ export default function SimpleSpacePortfolio() {
                   <p className="project-details">{project.details}</p>
                 </div>
 
-                {/* Project Content */}
                 <div className="project-content">
-                  {/* Main Display - Video and App Side by Side */}
                   <div className="main-display-container mb-16">
-                    {/* Demo Video Section - Only if video exists */}
-                    {project.video && (
-                      <div className="video-display">
-                        <div className="video-container">
-                          <div className="video-frame">
+                    {/* Video or Image Slideshow */}
+                    <div className="video-display">
+                      <div className="video-container">
+                        <div className="video-frame">
+                          {project.video ? (
                             <video
                               src={project.video}
                               autoPlay
@@ -180,11 +196,15 @@ export default function SimpleSpacePortfolio() {
                               playsInline
                               className="video-element"
                             />
-                          </div>
-                          <div className="video-label">DEMO VIDEO</div>
+                          ) : (
+                            <ImageSlideshow images={project.images} />
+                          )}
+                        </div>
+                        <div className="video-label">
+                          {project.video ? "DEMO VIDEO" : "APP PREVIEW"}
                         </div>
                       </div>
-                    )}
+                    </div>
 
                     {/* Main App Image */}
                     <div className="main-app-display">
@@ -219,7 +239,6 @@ export default function SimpleSpacePortfolio() {
                       ))}
                     </div>
 
-                    {/* Tech Stack Info */}
                     {project.techStack && (
                       <div className="tech-stack-section">
                         <div className="tech-stack-card">
@@ -250,7 +269,6 @@ export default function SimpleSpacePortfolio() {
                   </div>
                 </div>
 
-                {/* Divider */}
                 {index < projects.length - 1 && (
                   <div className="project-divider">
                     <div className="divider-line"></div>
@@ -260,7 +278,6 @@ export default function SimpleSpacePortfolio() {
             ))}
           </div>
 
-          {/* Footer */}
           <div className="text-center mt-40">
             <div className="text-4xl font-black mb-4">PORTFOLIO</div>
             <div className="text-sm tracking-widest text-gray-500">PORTFOLIO • 2025 • SPACE</div>
@@ -268,7 +285,6 @@ export default function SimpleSpacePortfolio() {
         </div>
       </div>
 
-      {/* ⭐ Styles */}
       <style jsx>{`
         :global(html), :global(body) { overflow-x: hidden; }
         .fade-in {
@@ -292,6 +308,29 @@ export default function SimpleSpacePortfolio() {
           background-size: 200px 100px;
           opacity: 0.3;
         }
+
+        /* Slideshow Styles */
+        .slideshow-container {
+          width: 100%;
+          height: 100%;
+          position: relative;
+          overflow: hidden;
+          border-radius: 8px;
+        }
+        .slideshow-image {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          opacity: 0;
+          transition: opacity 0.8s ease-in-out;
+        }
+        .slideshow-image.active {
+          opacity: 1;
+        }
+
         .project-section { position: relative; }
         .project-header { text-align: left; max-width: 600px; }
         .project-title { font-size: 4rem; font-weight: 900; letter-spacing: 0.05em; margin: 0; }
@@ -299,7 +338,6 @@ export default function SimpleSpacePortfolio() {
         .project-description { font-size: 14px; color: #888; font-weight: 600; letter-spacing: 0.2em; margin: 8px 0; }
         .project-details { font-size: 18px; color: #ccc; line-height: 1.5; margin: 0; }
         
-        /* Main Display Container - Side by Side */
         .main-display-container { display: flex; justify-content: center; align-items: flex-start; gap: 40px; }
         
         .main-app-display { display: flex; justify-content: center; }
@@ -308,7 +346,6 @@ export default function SimpleSpacePortfolio() {
         .app-image { max-width: 100%; max-height: 100%; object-fit: contain; filter: contrast(1.1); }
         .app-label { font-size: 14px; color: #666; font-weight: 600; letter-spacing: 0.15em; }
         
-        /* Video Styles */
         .video-display { display: flex; justify-content: center; }
         .video-container { display: flex; flex-direction: column; align-items: center; gap: 20px; }
         .video-frame { width: 240px; height: 520px; border: 2px solid rgba(255,255,255,0.2); border-radius: 16px; overflow: hidden; background: rgba(255,255,255,0.02); display: flex; align-items: center; justify-content: center; padding: 8px; }
@@ -327,7 +364,6 @@ export default function SimpleSpacePortfolio() {
         .project-divider { margin-top: 100px; display: flex; justify-content: center; }
         .divider-line { width: 220px; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); }
         
-        /* Tech Stack Section */
         .tech-stack-section { margin-top: 60px; display: flex; justify-content: center; }
         .tech-stack-card { max-width: 800px; width: 100%; border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; background: rgba(255,255,255,0.02); padding: 32px; }
         .tech-stack-title { font-size: 14px; color: #888; font-weight: 700; letter-spacing: 0.2em; margin-bottom: 24px; text-align: center; }

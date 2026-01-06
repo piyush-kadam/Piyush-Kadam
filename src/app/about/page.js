@@ -63,6 +63,19 @@ export default function PortfolioPage() {
                     <h4 className="text-2xl font-bold text-white">AppliedPlus</h4>
                     <p className="text-white/70 text-base">Development Intern</p>
                   </div>
+                  
+                  <div className="space-y-3 mb-4">
+                    <div className="bg-white/5 border border-white/20 p-4 rounded-lg">
+                      <h5 className="font-bold text-base mb-1">AppliedPlus - Job Search App</h5>
+                      <p className="text-white/60 text-sm">Smart Recommendations • Best For You Section • Jobs From All Platforms</p>
+                    </div>
+                    
+                    <div className="bg-white/5 border border-white/20 p-4 rounded-lg">
+                      <h5 className="font-bold text-base mb-1">IIMJobs Automation API</h5>
+                      <p className="text-white/60 text-sm">Python • Flask • Selenium • REST API</p>
+                    </div>
+                  </div>
+                  
                   <p className="text-white/80 text-base leading-relaxed">
                     Developed a job search app and built a custom automation API using Python, Flask, and Selenium. 
                     This API was designed to automate job applications on platforms like IIMJobs.
@@ -71,14 +84,7 @@ export default function PortfolioPage() {
               </div>
             </div>
 
-            {/* Backend Integration */}
-            <div>
-              <h3 className="text-2xl font-bold mb-4 text-white">Backend Integration</h3>
-              <p className="text-white/80 text-base mb-3">Strong experience using Firebase for:</p>
-              <p className="text-white/70 text-base leading-relaxed">
-                Real-time Firestore databases, Firebase Authentication, Cloud Functions, and Push Notifications.
-              </p>
-            </div>
+           
 
             {/* Connect */}
             <div>
