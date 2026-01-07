@@ -148,7 +148,7 @@ export default function Navbar() {
                 className="bg-white text-black px-3 sm:px-4 lg:px-5 py-2 rounded-full font-medium text-xs sm:text-sm lg:text-base hover:bg-gray-200 hover:scale-105 active:scale-95 transition-transform duration-200 flex-shrink-0 whitespace-nowrap"
               >
                 <span className="hidden sm:inline">Connect</span>
-                <span className="sm:hidden">Start</span>
+                <span className="sm:hidden">Connect</span>
               </Link>
 
             </nav>

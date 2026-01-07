@@ -2,9 +2,6 @@
 import { useState, useRef, useEffect } from "react";
 
 export default function SimpleSpacePortfolio() {
-  const [videoEnded, setVideoEnded] = useState(false);
-  const [muted, setMuted] = useState(true);
-  const [isFadingOut, setIsFadingOut] = useState(false);
   const videoRef = useRef(null);
 
   const projects = [
@@ -114,66 +111,8 @@ export default function SimpleSpacePortfolio() {
     );
   };
 
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.playbackRate = 0.75;
-    }
-  }, []);
-
-  const handleVideoEnd = () => {
-    setIsFadingOut(true);
-    setTimeout(() => {
-      setVideoEnded(true);
-    }, 1200);
-  };
-
-  const toggleMute = () => {
-    setMuted((prev) => !prev);
-    if (videoRef.current) {
-      videoRef.current.muted = !videoRef.current.muted;
-    }
-  };
-
-  const skipVideo = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-    }
-    handleVideoEnd();
-  };
-
   return (
     <div className="min-h-screen bg-black text-white relative">
-      {!videoEnded && (
-        <div
-          className={`fixed inset-0 z-50 flex items-center justify-center bg-black transition-opacity duration-1000 ${
-            isFadingOut ? "opacity-0" : "opacity-100"
-          }`}
-        >
-          <video
-            ref={videoRef}
-            src="/h5.mp4"
-            autoPlay
-            muted={muted}
-            className="w-full h-full object-cover fade-in"
-            onEnded={handleVideoEnd}
-          />
-          <div className="absolute bottom-6 right-6 flex gap-3">
-            <button
-              onClick={toggleMute}
-              className="px-4 py-2 bg-white/20 text-white rounded-lg border border-white/40 hover:bg-white/30 transition"
-            >
-              {muted ? "Unmute" : "Mute"}
-            </button>
-            <button
-              onClick={skipVideo}
-              className="px-4 py-2 bg-red-500/80 text-white rounded-lg hover:bg-red-600/90 transition"
-            >
-              Skip Intro
-            </button>
-          </div>
-        </div>
-      )}
-
       <div className="w-full min-h-screen relative">
         <div className="fixed inset-0 z-0">
           <div className="absolute inset-0 bg-black"></div>
