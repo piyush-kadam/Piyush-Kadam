@@ -12,15 +12,15 @@ export default function SimpleSpacePortfolio() {
       name: "POTATOBOOK",
       mainImage: "/potatobook.png",
       video: "/potato.mp4",
-      images: [
-  "/P1.PNG",
-  "/P2.PNG",
-  "/P3.PNG",
-  "/P4.PNG",
-  "/P5.PNG",
-  "/P6.PNG",
-  "/P7.PNG",
-  "/P8.PNG"
+     images: [
+  "/p1.PNG",
+  "/p2.PNG",
+  "/p3.PNG",
+  "/p4.PNG",
+  "/p5.PNG",
+  "/p6.PNG",
+  "/p7.PNG",
+  "/p8.PNG"
 ],
 
       description: "AN EXPENSE MANAGEMENT PLATFORM",
