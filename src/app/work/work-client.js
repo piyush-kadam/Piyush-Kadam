@@ -19,7 +19,7 @@ export default function SimpleSpacePortfolio() {
   "/p4.PNG",
   "/p5.PNG",
   "/p6.PNG",
-  "/p7.PNG",
+  "/p7.jpg",
   "/p8.PNG"
 ],
 
@@ -217,7 +217,7 @@ export default function SimpleSpacePortfolio() {
                           )}
                         </div>
                         <div className="video-label">
-                          {project.video ? "DEMO VIDEO" : "APP PREVIEW"}
+                          {project.video ? "APP PREVIEW" : "APP PREVIEW"}
                         </div>
                       </div>
                     </div>
