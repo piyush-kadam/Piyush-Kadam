@@ -47,7 +47,7 @@ export default function PortfolioPage() {
                     </div>
                     
                     <div className="bg-white/5 border border-white/20 p-4 rounded-lg">
-                      <h5 className="font-bold text-base mb-1">Tixoo - Event Management App</h5>
+                      <h5 className="font-bold text-base mb-1">Terran -Event App</h5>
                       <p className="text-white/60 text-sm">Apple Sign-in • Advanced UI/UX • Real-time Updates</p>
                     </div>
                   </div>
