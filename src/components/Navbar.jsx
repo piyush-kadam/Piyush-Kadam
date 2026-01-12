@@ -105,7 +105,7 @@ export default function Navbar() {
   href="/"
   className={`text-xl sm:text-2xl lg:text-3xl tracking-wide text-white hover:text-gray-300 transition flex-shrink-0 font-bold ${greatVibes.className}`}
 >
-                Piyush Kadam
+                Piyush
               </Link>
 
               {/* Desktop Menu */}
