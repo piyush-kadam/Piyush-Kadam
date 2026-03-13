@@ -8,7 +8,7 @@ export default function SimpleSpacePortfolio() {
    {
   name: "MELOD AI",
   mainImage: "/melodai.png",
-  video: "/melodai.mp4",
+  video: "https://res.cloudinary.com/dwekh4tpm/video/upload/v1773424654/melodai_ovxiff.mp4",
   images: [
     "/M1.PNG",
     "/M2.png",
@@ -33,7 +33,7 @@ export default function SimpleSpacePortfolio() {
 {
   name: "CleverNote",
   mainImage: "/clevernotee.png",
-  video: "/clevernote.mp4",
+  video: "https://res.cloudinary.com/dwekh4tpm/video/upload/v1773424681/clevernote_yb1ady.mp4",
   images: [
     "/C1.PNG",
     "/C2.png",
@@ -58,7 +58,7 @@ export default function SimpleSpacePortfolio() {
 {
   name: "CleanMyPhone",
   mainImage: "/cleanmyphone.png",
-  video: "/cleanmyphone.MP4",
+  video: "https://res.cloudinary.com/dwekh4tpm/video/upload/v1773424736/cleanmyphone_n3iogg.mp4",
   images: [
     "/Cm1.PNG",
     "/Cm2.png",
