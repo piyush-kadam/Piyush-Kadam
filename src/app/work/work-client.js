@@ -5,7 +5,82 @@ export default function SimpleSpacePortfolio() {
   const videoRef = useRef(null);
 
   const projects = [
-     {
+   {
+  name: "MELOD AI",
+  mainImage: "/melodai.png",
+  video: "/melodai.mp4",
+  images: [
+    "/M1.PNG",
+    "/M2.png",
+    "/M3.png",
+    "/M4.png",
+    "/M5.png",
+    "/M6.png",
+    "/M7.png",
+    "/M8.PNG",
+  ],
+  description: "AN AI MUSIC GENERATOR PLATFORM",
+  details: "MelodAI is an AI music creation app that helps users generate original songs and AI covers in seconds. Users can type lyrics or a simple text prompt, choose from many genres and styles, and receive a polished track with vocals, melody, and instrumentals. The app also supports AI-powered cover creation, letting users transform songs into new voice styles for fun and sharing. MelodAI is designed to be simple, fast, and accessible, even for people with no musical background. It is ideal for content creators, aspiring songwriters, music lovers, and anyone who wants to create, cover, and share music easily.",
+  appLink: "https://apps.apple.com/in/app/melodai-ai-music-generator/id6753100795",
+  year: "2026",
+  techStack: {
+    framework: "Flutter , Firebase , RevenueCat",
+    database: "Firebase Firestore",
+    auth: "Gmail, OTP Auth, Google Sign In, Apple Sign In",
+    technologies: "In-App Subscription, Push Notifications , AI Music Generation (multi-genre) , AI Cover Creation , Text-to-Song Conversion , Customization Options , Social Sharing"
+  }
+},
+{
+  name: "CleverNote",
+  mainImage: "/clevernotee.png",
+  video: "/clevernote.mp4",
+  images: [
+    "/C1.PNG",
+    "/C2.png",
+    "/C3.png",
+    "/C4.png",
+    "/C5.png",
+    "/C6.png",
+    "/C7.png",
+    "/C8.PNG",
+  ],
+  description: "Every meeting, perfectly remembered.",
+  details: "CleverNote is an AI-powered note-taking app that transforms audio, video, PDFs, and YouTube links into structured, searchable notes. It offers automatic transcription, smart summaries, and extracts key highlights and action items. An interactive AI assistant lets you query your notes, rewrite content, or generate scripts. With auto-categorization, full-text search, and multi-format export, it's ideal for students, professionals, content creators, and researchers.",
+  appLink: "https://apps.apple.com/in/app/clevernote-ai-note-taker/id6753180281",
+  year: "2026",
+  techStack: {
+    framework: "Flutter , Firebase , RevenueCat",
+    database: "Firebase Firestore",
+    auth: "Gmail, OTP Auth, Google Sign In, Apple Sign In",
+    technologies: "In-App Subscription, Push Notifications , Automatic transcription (multi-language) , Smart Summarization, Key Highlights Extraction, Action Items Detection, AI Assistant, Auto-categorization, Full-text Search, Multi-format Export"
+  }
+},
+{
+  name: "CleanMyPhone",
+  mainImage: "/cleanmyphone.png",
+  video: "/cleanmyphone.MP4",
+  images: [
+    "/Cm1.PNG",
+    "/Cm2.png",
+    "/Cm3.png",
+    "/Cm4.png",
+    "/Cm5.png",
+    "/Cm6.png",
+    "/Cm7.png",
+    "/Cm8.PNG",
+  ],
+  description: "Less clutter. More storage. One tap.",
+  details: "Clean My Phone is an all-in-one iPhone cleaning app that quickly frees up storage and keeps your device organized. It scans your phone and removes duplicate and blurry photos, compresses large videos, clears spam emails in bulk, and merges duplicate contacts. A built-in Private Vault lets you store sensitive files securely, and a Water Eject feature uses sound vibrations to push moisture from your speaker. Simple, fast, and designed for everyday users — just scan, review, and clean.",
+  appLink: "https://apps.apple.com/in/app/clean-my-phone-ai-cleaner/id6759080389",
+  year: "2026",
+  techStack: {
+   framework: "Flutter , Firebase , RevenueCat",
+    database: "Firebase Firestore",
+    auth: "Gmail, OTP Auth, Google Sign In, Apple Sign In",
+    technologies: "In-App Subscription, Push Notifications , Storage Optimization , Mail cleaning , Contact Management , Private Vault , Water Eject"
+  }
+},
+    {
       name: "POTATOBOOK",
       mainImage: "/potatobook.png",
       video: "/potato.mp4",
@@ -23,9 +98,9 @@ export default function SimpleSpacePortfolio() {
 
       description: "AN EXPENSE MANAGEMENT PLATFORM",
       details: "This APP was made for Rachitroo famous YT creator while working as an intern for 7SEERS media",
-      year: "2025",
+      year: "2026",
       techStack: {
-        framework: "Flutter & Firebase",
+       framework: "Flutter , Firebase , RevenueCat",
         database: "Firebase Firestore",
         auth: "Gmail, OTP Auth, Google Sign In, Apple Sign In",
         technologies: "In-App Subscription , Push Notifications"
@@ -135,6 +210,16 @@ export default function SimpleSpacePortfolio() {
                   </div>
                   <p className="project-description">{project.description}</p>
                   <p className="project-details">{project.details}</p>
+                  {project.appLink && (
+                    <a
+                      href={project.appLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="project-link"
+                    >
+                      View on App Store
+                    </a>
+                  )}
                 </div>
 
                 <div className="project-content">
@@ -145,6 +230,7 @@ export default function SimpleSpacePortfolio() {
                         <div className="video-frame">
                           {project.video ? (
                             <video
+                              ref={videoRef}
                               src={project.video}
                               autoPlay
                               muted
@@ -201,7 +287,7 @@ export default function SimpleSpacePortfolio() {
                           <div className="tech-stack-title">TECHNICAL SPECIFICATIONS</div>
                           <div className="tech-stack-content">
                             <div className="tech-item">
-                              <span className="tech-label">Framework:</span>
+                              <span className="tech-label">TECHSTACK:</span>
                               <span className="tech-value">{project.techStack.framework}</span>
                             </div>
                             <div className="tech-item">
@@ -214,7 +300,7 @@ export default function SimpleSpacePortfolio() {
                             </div>
                             {project.techStack.technologies && (
                               <div className="tech-item">
-                                <span className="tech-label">Technologies:</span>
+                                <span className="tech-label">FEATURES:</span>
                                 <span className="tech-value">{project.techStack.technologies}</span>
                               </div>
                             )}
@@ -287,11 +373,25 @@ export default function SimpleSpacePortfolio() {
         }
 
         .project-section { position: relative; }
-        .project-header { text-align: left; max-width: 600px; }
+        .project-header { text-align: left; max-width: 100%; }
         .project-title { font-size: 4rem; font-weight: 900; letter-spacing: 0.05em; margin: 0; }
         .project-year { font-size: 1.2rem; color: #666; font-weight: 600; }
         .project-description { font-size: 14px; color: #888; font-weight: 600; letter-spacing: 0.2em; margin: 8px 0; }
         .project-details { font-size: 18px; color: #ccc; line-height: 1.5; margin: 0; }
+        .project-link {
+          display: inline-block;
+          margin-top: 14px;
+          font-size: 14px;
+          color: #ffffff;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+          text-decoration: underline;
+          text-underline-offset: 4px;
+          transition: opacity 0.3s ease;
+        }
+        .project-link:hover {
+          opacity: 0.75;
+        }
         
         .main-display-container { display: flex; justify-content: center; align-items: flex-start; gap: 40px; }
         
@@ -332,6 +432,8 @@ export default function SimpleSpacePortfolio() {
           .titlebar { flex-direction: column; align-items: center; gap: 6px; }
           .project-title { font-size: 2.25rem; line-height: 1.1; }
           .project-year { font-size: 1rem; }
+          .project-details { font-size: 16px; }
+          .project-link { font-size: 13px; }
           .main-display-container { flex-direction: column; align-items: center; gap: 24px; }
           .main-app-display { justify-content: center; }
           .app-frame { width: min(92vw, 360px); height: auto; aspect-ratio: 4 / 3; padding: 12px; margin: 0 auto; }

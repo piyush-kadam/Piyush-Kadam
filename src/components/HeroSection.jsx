@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import LightRays from '@/components/LightRays';
+import Dither from '@/components/Dither';
 
 export default function WorkExperience() {
   const sectionRef = useRef(null);
@@ -48,6 +48,7 @@ export default function WorkExperience() {
       image: "/polo2.png",
       icon: "https://skillicons.dev/icons?i=flutter"
     },
+    
     {
       title: "7Seers Media",
       role: "Lead Flutter Developer",
@@ -56,92 +57,85 @@ export default function WorkExperience() {
       image: "/polo1.png",
       icon: "https://skillicons.dev/icons?i=firebase"
     },
-   {
-  title: "WorkState",
-  role: "Founder",
-  roleLink: "https://workstate.in",
-  period: "September 2025 - Present",
-  description:
-    "Founder of a Digital Media Agency creating production-ready applications with a modern tech stack. Focused on scalable solutions and delivering value to clients through creative and innovative ideas.",
-  image: "/polo.png",
-  icon: "https://skillicons.dev/icons?i=vercel"
-}
-
+    {
+      title: "MelodAI",
+      role: "Lead Flutter Developer",
+      period: "February 2026 - Present",
+      description: "Developing and maintaining cross-platform mobile applications using Flutter, with a focus on performance, scalability, and clean architecture.Building iOS-specific features and ensuring smooth platform integrations and optimized user experience.Collaborating closely with designers and backend teams to translate product requirements into reliable app features.Integrating APIs, managing app state, and implementing responsive, user-friendly UI components.Writing clean, maintainable code and participating in debugging, testing, and performance optimization.Contributing to feature planning, iterative improvements, and production-ready releases",
+      image: "/melodaiw.png",
+      icon: "https://skillicons.dev/icons?i=flutter"
+    },
+    {
+      title: "WorkState",
+      role: "Founder",
+      roleLink: "https://workstate.in",
+      period: "September 2025 - Present",
+      description:
+        "Founder of a Digital Media Agency creating production-ready applications with a modern tech stack. Focused on scalable solutions and delivering value to clients through creative and innovative ideas.",
+      image: "/polo.png",
+      icon: "https://skillicons.dev/icons?i=vercel"
+    }
   ];
 
-const skills = [
-  { name: "Flutter", icon: "flutter" },
-  { name: "Firebase", icon: "firebase" },
-  { name: "Supabase", icon: "supabase" },
-  { name: "MongoDB", icon: "mongodb" },
-
-  { name: "Android", icon: "androidstudio" },
-  { name: "iOS", icon: "apple" },
-
-  { name: "JavaScript", icon: "javascript" },
-  { name: "Next.js", icon: "nextjs" },
-  { name: "Node.js", icon: "nodejs" },
-  { name: "UI/UX Design", icon: "figma" },
-  { name: "REST APIs", icon: "postman" },
-  { name: "Android Studio", icon: "androidstudio" },
-  { name: "Dart", icon: "dart" },
-  { name: "SQL", icon: "mysql" },
-  { name: "Python", icon: "python" },
-  { name: "C++", icon: "cpp" },
-  { name: "Git", icon: "git" },
-  { name: "GitHub", icon: "github" }
-];
-
-
+  const skills = [
+    { name: "Flutter", icon: "flutter" },
+    { name: "Firebase", icon: "firebase" },
+    { name: "Supabase", icon: "supabase" },
+    { name: "MongoDB", icon: "mongodb" },
+    { name: "Android", icon: "androidstudio" },
+    { name: "iOS", icon: "apple" },
+    { name: "JavaScript", icon: "javascript" },
+    { name: "Next.js", icon: "nextjs" },
+    { name: "Node.js", icon: "nodejs" },
+    { name: "UI/UX Design", icon: "figma" },
+    { name: "REST APIs", icon: "postman" },
+    { name: "Android Studio", icon: "androidstudio" },
+    { name: "Dart", icon: "dart" },
+    { name: "SQL", icon: "mysql" },
+    { name: "Python", icon: "python" },
+    { name: "C++", icon: "cpp" },
+    { name: "Git", icon: "git" },
+    { name: "GitHub", icon: "github" }
+  ];
 
   return (
     <div className="overflow-x-hidden">
       {/* Intro Section */}
-      <section className="min-h-screen bg-black text-white flex items-center px-4 sm:px-6 md:px-10 lg:px-20 relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none opacity-40">
-          <LightRays
-            raysOrigin="top-center"
-            raysColor="#ffffff"
-            raysSpeed={1.0}
-            lightSpread={2.7}
-            rayLength={3.5}
-            followMouse={true}
-            mouseInfluence={0.25}
-            noiseAmount={0.15}
-            distortion={0.0}
-            fadeDistance={1.0}
-            saturation={1.0}
+      <section className="min-h-screen bg-black text-white flex items-center justify-center relative overflow-hidden">
+        <div style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }}>
+          <Dither
+            waveColor={[0.5, 0.5, 0.5]}
+            disableAnimation={false}
+            enableMouseInteraction={true}
+            mouseRadius={0.3}
+            colorNum={4}
+            waveAmplitude={0.3}
+            waveFrequency={3}
+            waveSpeed={0.05}
           />
         </div>
 
-        <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
-          <div>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-6 md:mb-8 leading-tight tracking-tight">
-              I CRAFT SCALABLE,<br/>
-              CROSS-PLATFORM APPS.
-            </h1>
-            <p className="text-sm sm:text-base md:text-lg text-gray-400 mb-6 md:mb-8 leading-relaxed">
-              I'm a Flutter Developer skilled in building high-performance, multi-platform apps with clean UI, scalable architecture, and seamless integrations.
-            </p>
-           <a
-  href="/resume.pdf"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="inline-block"
->
-  <button className="bg-white hover:bg-gray-100 text-black font-bold px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base rounded-lg transition-all transform hover:scale-105">
-    Check My Resume
-  </button>
-</a>
-
-          </div>
-          <div className="flex justify-center lg:justify-end mt-8 lg:mt-0">
-            <img 
-              src="/fire.gif" 
-              alt="Fire animation" 
-              className="w-full max-w-xs sm:max-w-sm md:max-w-md"
-            />
-          </div>
+        <div className="relative z-10 text-center px-4 sm:px-8 md:px-16 max-w-6xl mx-auto pt-32 sm:pt-40 md:pt-40">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-4 leading-tight tracking-tight text-white whitespace-nowrap">
+            DESIGN . DEVELOP . DEPLOY
+          </h1>
+          <p className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight text-white">
+            Cross Platform Apps
+          </p>
+          <p className="text-base sm:text-lg md:text-xl text-white mb-12 max-w-2xl mx-auto leading-relaxed font-light">
+            Building high-performance, cross-platform apps with clean UI,
+            scalable architecture, and seamless integrations.
+          </p>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block"
+          >
+            <button className="bg-white hover:bg-gray-100 text-black font-bold px-10 py-4 text-sm sm:text-base rounded-lg transition-all transform hover:scale-105 tracking-widest uppercase">
+              View Resume
+            </button>
+          </a>
         </div>
       </section>
 
@@ -267,23 +261,22 @@ const skills = [
                                   </div>
                                   <h3 className="text-2xl lg:text-3xl font-bold text-white">{exp.title}</h3>
                                 </div>
-                               <p className="text-white/90 font-semibold mb-2 text-base">
-  {exp.role}
-  {exp.roleLink && (
-    <>
-      {" · "}
-      <a
-        href={exp.roleLink}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-white hover:underline"
-      >
-        workstate.in
-      </a>
-    </>
-  )}
-</p>
-
+                                <p className="text-white/90 font-semibold mb-2 text-base">
+                                  {exp.role}
+                                  {exp.roleLink && (
+                                    <>
+                                      {" · "}
+                                      <a
+                                        href={exp.roleLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-white hover:underline"
+                                      >
+                                        workstate.in
+                                      </a>
+                                    </>
+                                  )}
+                                </p>
                                 <p className="text-gray-400 text-xs lg:text-sm mb-4 lg:mb-5 font-medium">{exp.period}</p>
                                 <p className="text-white/70 text-sm leading-relaxed">{exp.description}</p>
                               </div>
