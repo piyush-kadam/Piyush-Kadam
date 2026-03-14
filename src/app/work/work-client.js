@@ -37,8 +37,8 @@ export default function SimpleSpacePortfolio() {
   images: [
     "/C1.PNG",
     "/C2.PNG",
-    "/CN3.PNG",
-    "/CN4.PNG",
+    "/CN3.png",
+    "/CN4.png",
     "/C5.PNG",
     "/C6.PNG",
     "/C7.PNG",
