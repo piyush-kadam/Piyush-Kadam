@@ -63,123 +63,7 @@ const ImageSlideshow = ({ images }) => {
   );
 };
 
-// Loader Component
-const Loader = ({ onComplete }) => {
-  const [progress, setProgress] = useState(0);
-  const [fadeOut, setFadeOut] = useState(false);
-
-  useEffect(() => {
-    // Simulate loading progress
-    const duration = 3000; // 3 seconds total
-    const interval = 30; // update every 30ms
-    const steps = duration / interval;
-    let currentStep = 0;
-
-    const timer = setInterval(() => {
-      currentStep++;
-      // Eased progress: faster at start, slower near end
-      const rawProgress = currentStep / steps;
-      const easedProgress = Math.min(
-        100,
-        Math.round(100 * (1 - Math.pow(1 - rawProgress, 2.5)))
-      );
-      setProgress(easedProgress);
-
-      if (currentStep >= steps) {
-        clearInterval(timer);
-        setProgress(100);
-        // Start fade out after reaching 100%
-        setTimeout(() => {
-          setFadeOut(true);
-          setTimeout(() => {
-            onComplete();
-          }, 600);
-        }, 300);
-      }
-    }, interval);
-
-    return () => clearInterval(timer);
-  }, [onComplete]);
-
-  return (
-    <div className={`loader-overlay ${fadeOut ? "fade-out" : ""}`}>
-      <div className="loader-content">
-        <div className="loader-header">
-          <span className="loader-text">LOADING ...</span>
-          <span className="loader-percent">{progress}%</span>
-        </div>
-        <div className="loader-bar-track">
-          <div
-            className="loader-bar-fill"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-      </div>
-
-      <style jsx>{`
-        .loader-overlay {
-          position: fixed;
-          inset: 0;
-          background: #000;
-          z-index: 9999;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: opacity 0.6s ease;
-        }
-        .loader-overlay.fade-out {
-          opacity: 0;
-          pointer-events: none;
-        }
-        .loader-content {
-          width: min(700px, 85vw);
-          display: flex;
-          flex-direction: column;
-          gap: 16px;
-        }
-        .loader-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: baseline;
-        }
-        .loader-text {
-          font-family: 'Arial Black', 'Arial Bold', Arial, sans-serif;
-          font-weight: 900;
-          font-size: clamp(1.2rem, 3vw, 1.8rem);
-          color: #fff;
-          letter-spacing: 0.05em;
-        }
-        .loader-percent {
-          font-family: 'Arial Black', 'Arial Bold', Arial, sans-serif;
-          font-weight: 900;
-          font-size: clamp(1.2rem, 3vw, 1.8rem);
-          color: #fff;
-          letter-spacing: 0.02em;
-        }
-        .loader-bar-track {
-          width: 100%;
-          height: 44px;
-          border: 2.5px solid #fff;
-          border-radius: 0;
-          overflow: hidden;
-          background: #000;
-          padding: 4px;
-          box-sizing: border-box;
-        }
-        .loader-bar-fill {
-          height: 100%;
-          background: #fff;
-          border-radius: 0;
-          transition: width 0.03s linear;
-        }
-      `}</style>
-    </div>
-  );
-};
-
 export default function SimpleSpacePortfolio() {
-  const [loaded, setLoaded] = useState(false);
-
   const projects = [
     {
       name: "MELOD AI",
@@ -304,254 +188,243 @@ export default function SimpleSpacePortfolio() {
   ];
 
   return (
-    <>
-      {!loaded && <Loader onComplete={() => setLoaded(true)} />}
-
-      <div
-        className="min-h-screen bg-black text-white relative"
-        style={{
-          opacity: loaded ? 1 : 0,
-          transition: "opacity 0.8s ease",
-          pointerEvents: loaded ? "auto" : "none",
-        }}
-      >
-        <div className="w-full min-h-screen relative">
-          <div className="fixed inset-0 z-0">
-            <div className="absolute inset-0 bg-black"></div>
-            <div className="stars"></div>
-          </div>
-
-          <div className="relative z-20 pt-32 pb-16">
-            <div className="text-center mb-20">
-              <h1 className="text-6xl md:text-8xl font-black mb-4 tracking-wider">PORTFOLIO</h1>
-              <div className="text-lg tracking-[0.3em] text-gray-400 font-light">DIGITAL ARCHITECT</div>
-            </div>
-
-            <div className="max-w-7xl mx-auto px-6 space-y-32">
-              {projects.map((project, index) => (
-                <div key={project.name} className="project-section">
-                  <div className="project-header mb-12">
-                    <div className="titlebar flex items-baseline justify-between mb-4">
-                      <h2 className="project-title">{project.name}</h2>
-                      <span className="project-year">{project.year}</span>
-                    </div>
-                    <p className="project-description">{project.description}</p>
-                    <p className="project-details">{project.details}</p>
-                    {project.appLink && (
-                      <a
-                        href={project.appLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="project-link"
-                      >
-                        View on App Store
-                      </a>
-                    )}
-                  </div>
-
-                  <div className="project-content">
-                    <div className="main-display-container mb-16">
-                      <div className="video-display">
-                        <div className="video-container">
-                          <div className="video-frame">
-                            {project.video ? (
-                              <VideoPlayer src={project.video} />
-                            ) : (
-                              <ImageSlideshow images={project.images} />
-                            )}
-                          </div>
-                          <div className="video-label">APP PREVIEW</div>
-                        </div>
-                      </div>
-
-                      <div className="main-app-display">
-                        <div className="app-container">
-                          <div className="app-frame">
-                            <img src={project.mainImage} alt={project.name} className="app-image" />
-                          </div>
-                          <div className="app-label">APPLICATION</div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="screenshots-section">
-                      <div className="section-label mb-8">
-                        APP SCREENSHOTS • {project.images.length} IMAGES
-                      </div>
-                      <div className="screenshots-grid">
-                        {project.images.map((imageSrc, imgIndex) => (
-                          <div key={imgIndex} className="screenshot-item">
-                            <div className="screenshot-frame">
-                              <img
-                                src={imageSrc}
-                                alt={`${project.name} screenshot ${imgIndex + 1}`}
-                                className="screenshot-image"
-                              />
-                            </div>
-                            <div className="screenshot-number">
-                              {String(imgIndex + 1).padStart(2, "0")}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-
-                      {project.techStack && (
-                        <div className="tech-stack-section">
-                          <div className="tech-stack-card">
-                            <div className="tech-stack-title">TECHNICAL SPECIFICATIONS</div>
-                            <div className="tech-stack-content">
-                              <div className="tech-item">
-                                <span className="tech-label">TECHSTACK:</span>
-                                <span className="tech-value">{project.techStack.framework}</span>
-                              </div>
-                              <div className="tech-item">
-                                <span className="tech-label">Database:</span>
-                                <span className="tech-value">{project.techStack.database}</span>
-                              </div>
-                              <div className="tech-item">
-                                <span className="tech-label">Authentication:</span>
-                                <span className="tech-value">{project.techStack.auth}</span>
-                              </div>
-                              {project.techStack.technologies && (
-                                <div className="tech-item">
-                                  <span className="tech-label">FEATURES:</span>
-                                  <span className="tech-value">{project.techStack.technologies}</span>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {index < projects.length - 1 && (
-                    <div className="project-divider">
-                      <div className="divider-line"></div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            <div className="text-center mt-40">
-              <div className="text-4xl font-black mb-4">PORTFOLIO</div>
-              <div className="text-sm tracking-widest text-gray-500">PORTFOLIO • 2025 • SPACE</div>
-            </div>
-          </div>
+    <div className="min-h-screen bg-black text-white relative">
+      <div className="w-full min-h-screen relative">
+        <div className="fixed inset-0 z-0">
+          <div className="absolute inset-0 bg-black"></div>
+          <div className="stars"></div>
         </div>
 
-        <style jsx>{`
-          :global(html), :global(body) { overflow-x: hidden; }
-          @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-          }
-          .stars {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: 
-              radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.2), transparent),
-              radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.2), transparent),
-              radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.2), transparent),
-              radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.2), transparent),
-              radial-gradient(1px 1px at 160px 30px, rgba(255,255,255,0.2), transparent);
-            background-repeat: repeat;
-            background-size: 200px 100px;
-            opacity: 0.3;
-          }
-          .slideshow-container {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-            background: rgba(0,0,0,0.3);
-          }
-          .slideshow-image-single {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            animation: fadeIn 0.5s ease-in;
-          }
-          .project-section { position: relative; }
-          .project-header { text-align: left; max-width: 100%; }
-          .project-title { font-size: 4rem; font-weight: 900; letter-spacing: 0.05em; margin: 0; }
-          .project-year { font-size: 1.2rem; color: #666; font-weight: 600; }
-          .project-description { font-size: 14px; color: #888; font-weight: 600; letter-spacing: 0.2em; margin: 8px 0; }
-          .project-details { font-size: 18px; color: #ccc; line-height: 1.5; margin: 0; }
-          .project-link {
-            display: inline-block;
-            margin-top: 14px;
-            font-size: 14px;
-            color: #ffffff;
-            font-weight: 600;
-            letter-spacing: 0.08em;
-            text-decoration: underline;
-            text-underline-offset: 4px;
-            transition: opacity 0.3s ease;
-          }
-          .project-link:hover { opacity: 0.75; }
-          .main-display-container { display: flex; justify-content: center; align-items: flex-start; gap: 40px; }
-          .main-app-display { display: flex; justify-content: center; }
-          .app-container { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-          .app-frame { width: 400px; height: 520px; border: 2px solid rgba(255,255,255,0.2); border-radius: 16px; overflow: hidden; background: rgba(255,255,255,0.02); display: flex; align-items: center; justify-content: center; padding: 8px; }
-          .app-image { max-width: 100%; max-height: 100%; object-fit: contain; filter: contrast(1.1); }
-          .app-label { font-size: 14px; color: #666; font-weight: 600; letter-spacing: 0.15em; }
-          .video-display { display: flex; justify-content: center; }
-          .video-container { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-          .video-frame { width: 240px; height: 520px; border: 2px solid rgba(255,255,255,0.2); border-radius: 16px; overflow: hidden; background: rgba(255,255,255,0.02); display: flex; align-items: center; justify-content: center; padding: 8px; }
-          .video-element { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
-          .video-label { font-size: 14px; color: #666; font-weight: 600; letter-spacing: 0.15em; }
-          .screenshots-section { margin-top: 80px; }
-          .section-label { font-size: 13px; color: #888; font-weight: 700; letter-spacing: 0.2em; text-align: center; }
-          .screenshots-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; justify-items: center; }
-          .screenshot-item { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; }
-          .screenshot-frame { width: 240px; height: 420px; border: 1px solid rgba(255,255,255,0.3); border-radius: 10px; overflow: hidden; background: rgba(255,255,255,0.01); display: flex; align-items: center; justify-content: center; padding: 16px; transition: all 0.3s ease; margin: 0 auto; margin-right: 20px; }
-          .screenshot-image { max-width: 100%; max-height: 100%; object-fit: contain; filter: grayscale(0.1) contrast(1.1); transition: filter 0.3s ease; }
-          .screenshot-frame:hover { border-color: rgba(255,255,255,0.5); transform: translateY(-6px); }
-          .screenshot-frame:hover .screenshot-image { filter: grayscale(0) contrast(1.2); }
-          .screenshot-number { font-size: 12px; color: #666; font-weight: 600; background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 4px; }
-          .project-divider { margin-top: 100px; display: flex; justify-content: center; }
-          .divider-line { width: 220px; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); }
-          .tech-stack-section { margin-top: 60px; display: flex; justify-content: center; }
-          .tech-stack-card { max-width: 800px; width: 100%; border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; background: rgba(255,255,255,0.02); padding: 32px; }
-          .tech-stack-title { font-size: 14px; color: #888; font-weight: 700; letter-spacing: 0.2em; margin-bottom: 24px; text-align: center; }
-          .tech-stack-content { display: flex; flex-direction: column; gap: 16px; }
-          .tech-item { display: flex; flex-direction: column; gap: 6px; padding: 12px; border-left: 2px solid rgba(255,255,255,0.1); }
-          .tech-label { font-size: 11px; color: #666; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; }
-          .tech-value { font-size: 16px; color: #ccc; font-weight: 400; line-height: 1.5; }
-          @media (max-width: 640px) {
-            .project-header { text-align: center; margin-left: auto; margin-right: auto; max-width: 90vw; }
-            .titlebar { flex-direction: column; align-items: center; gap: 6px; }
-            .project-title { font-size: 2.25rem; line-height: 1.1; }
-            .project-year { font-size: 1rem; }
-            .project-details { font-size: 16px; }
-            .project-link { font-size: 13px; }
-            .main-display-container { flex-direction: column; align-items: center; gap: 24px; }
-            .main-app-display { justify-content: center; }
-            .app-frame { width: min(92vw, 360px); height: auto; aspect-ratio: 4 / 3; padding: 12px; margin: 0 auto; }
-            .video-frame { width: min(92vw, 280px); height: auto; aspect-ratio: 9 / 19.5; }
-            .screenshots-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; width: 100%; }
-            .screenshot-item { width: 100%; align-items: center; }
-            .screenshot-frame { width: 100%; aspect-ratio: 9 / 16; height: auto; padding: 6px; }
-            .section-label { text-align: center; }
-            .project-divider { margin-top: 60px; }
-            .tech-stack-card { padding: 20px; margin: 0 16px; }
-            .tech-item { padding: 10px; }
-            .tech-value { font-size: 14px; }
-          }
-          @media (min-width: 641px) and (max-width: 1023px) {
-            .project-header { max-width: 90vw; }
-            .main-display-container { flex-direction: column; align-items: center; gap: 32px; }
-            .app-frame { width: 90vw; height: auto; aspect-ratio: 4 / 3; }
-            .video-frame { width: 320px; height: auto; aspect-ratio: 9 / 19.5; }
-            .screenshots-grid { grid-template-columns: repeat(2, 1fr); justify-items: center; }
-            .screenshot-frame { width: 280px; height: auto; aspect-ratio: 9 / 16; }
-          }
-        `}</style>
+        <div className="relative z-20 pt-32 pb-16">
+          <div className="text-center mb-20">
+            <h1 className="text-6xl md:text-8xl font-black mb-4 tracking-wider">PORTFOLIO</h1>
+            <div className="text-lg tracking-[0.3em] text-gray-400 font-light">DIGITAL ARCHITECT</div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-6 space-y-32">
+            {projects.map((project, index) => (
+              <div key={project.name} className="project-section">
+                <div className="project-header mb-12">
+                  <div className="titlebar flex items-baseline justify-between mb-4">
+                    <h2 className="project-title">{project.name}</h2>
+                    <span className="project-year">{project.year}</span>
+                  </div>
+                  <p className="project-description">{project.description}</p>
+                  <p className="project-details">{project.details}</p>
+                  {project.appLink && (
+                    <a
+                      href={project.appLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="project-link"
+                    >
+                      View on App Store
+                    </a>
+                  )}
+                </div>
+
+                <div className="project-content">
+                  <div className="main-display-container mb-16">
+                    <div className="video-display">
+                      <div className="video-container">
+                        <div className="video-frame">
+                          {project.video ? (
+                            <VideoPlayer src={project.video} />
+                          ) : (
+                            <ImageSlideshow images={project.images} />
+                          )}
+                        </div>
+                        <div className="video-label">APP PREVIEW</div>
+                      </div>
+                    </div>
+
+                    <div className="main-app-display">
+                      <div className="app-container">
+                        <div className="app-frame">
+                          <img src={project.mainImage} alt={project.name} className="app-image" />
+                        </div>
+                        <div className="app-label">APPLICATION</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="screenshots-section">
+                    <div className="section-label mb-8">
+                      APP SCREENSHOTS • {project.images.length} IMAGES
+                    </div>
+                    <div className="screenshots-grid">
+                      {project.images.map((imageSrc, imgIndex) => (
+                        <div key={imgIndex} className="screenshot-item">
+                          <div className="screenshot-frame">
+                            <img
+                              src={imageSrc}
+                              alt={`${project.name} screenshot ${imgIndex + 1}`}
+                              className="screenshot-image"
+                            />
+                          </div>
+                          <div className="screenshot-number">
+                            {String(imgIndex + 1).padStart(2, "0")}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {project.techStack && (
+                      <div className="tech-stack-section">
+                        <div className="tech-stack-card">
+                          <div className="tech-stack-title">TECHNICAL SPECIFICATIONS</div>
+                          <div className="tech-stack-content">
+                            <div className="tech-item">
+                              <span className="tech-label">TECHSTACK:</span>
+                              <span className="tech-value">{project.techStack.framework}</span>
+                            </div>
+                            <div className="tech-item">
+                              <span className="tech-label">Database:</span>
+                              <span className="tech-value">{project.techStack.database}</span>
+                            </div>
+                            <div className="tech-item">
+                              <span className="tech-label">Authentication:</span>
+                              <span className="tech-value">{project.techStack.auth}</span>
+                            </div>
+                            {project.techStack.technologies && (
+                              <div className="tech-item">
+                                <span className="tech-label">FEATURES:</span>
+                                <span className="tech-value">{project.techStack.technologies}</span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {index < projects.length - 1 && (
+                  <div className="project-divider">
+                    <div className="divider-line"></div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-40">
+            <div className="text-4xl font-black mb-4">PORTFOLIO</div>
+            <div className="text-sm tracking-widest text-gray-500">PORTFOLIO • 2025 • SPACE</div>
+          </div>
+        </div>
       </div>
-    </>
+
+      <style jsx>{`
+        :global(html), :global(body) { overflow-x: hidden; }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        .stars {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-image: 
+            radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.2), transparent),
+            radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.2), transparent),
+            radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.2), transparent),
+            radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.2), transparent),
+            radial-gradient(1px 1px at 160px 30px, rgba(255,255,255,0.2), transparent);
+          background-repeat: repeat;
+          background-size: 200px 100px;
+          opacity: 0.3;
+        }
+        .slideshow-container {
+          width: 100%;
+          height: 100%;
+          position: relative;
+          overflow: hidden;
+          border-radius: 8px;
+          background: rgba(0,0,0,0.3);
+        }
+        .slideshow-image-single {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          animation: fadeIn 0.5s ease-in;
+        }
+        .project-section { position: relative; }
+        .project-header { text-align: left; max-width: 100%; }
+        .project-title { font-size: 4rem; font-weight: 900; letter-spacing: 0.05em; margin: 0; }
+        .project-year { font-size: 1.2rem; color: #666; font-weight: 600; }
+        .project-description { font-size: 14px; color: #888; font-weight: 600; letter-spacing: 0.2em; margin: 8px 0; }
+        .project-details { font-size: 18px; color: #ccc; line-height: 1.5; margin: 0; }
+        .project-link {
+          display: inline-block;
+          margin-top: 14px;
+          font-size: 14px;
+          color: #ffffff;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+          text-decoration: underline;
+          text-underline-offset: 4px;
+          transition: opacity 0.3s ease;
+        }
+        .project-link:hover { opacity: 0.75; }
+        .main-display-container { display: flex; justify-content: center; align-items: flex-start; gap: 40px; }
+        .main-app-display { display: flex; justify-content: center; }
+        .app-container { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+        .app-frame { width: 400px; height: 520px; border: 2px solid rgba(255,255,255,0.2); border-radius: 16px; overflow: hidden; background: rgba(255,255,255,0.02); display: flex; align-items: center; justify-content: center; padding: 8px; }
+        .app-image { max-width: 100%; max-height: 100%; object-fit: contain; filter: contrast(1.1); }
+        .app-label { font-size: 14px; color: #666; font-weight: 600; letter-spacing: 0.15em; }
+        .video-display { display: flex; justify-content: center; }
+        .video-container { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+        .video-frame { width: 240px; height: 520px; border: 2px solid rgba(255,255,255,0.2); border-radius: 16px; overflow: hidden; background: rgba(255,255,255,0.02); display: flex; align-items: center; justify-content: center; padding: 8px; }
+        .video-element { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+        .video-label { font-size: 14px; color: #666; font-weight: 600; letter-spacing: 0.15em; }
+        .screenshots-section { margin-top: 80px; }
+        .section-label { font-size: 13px; color: #888; font-weight: 700; letter-spacing: 0.2em; text-align: center; }
+        .screenshots-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; justify-items: center; }
+        .screenshot-item { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; }
+        .screenshot-frame { width: 240px; height: 420px; border: 1px solid rgba(255,255,255,0.3); border-radius: 10px; overflow: hidden; background: rgba(255,255,255,0.01); display: flex; align-items: center; justify-content: center; padding: 16px; transition: all 0.3s ease; margin: 0 auto; margin-right: 20px; }
+        .screenshot-image { max-width: 100%; max-height: 100%; object-fit: contain; filter: grayscale(0.1) contrast(1.1); transition: filter 0.3s ease; }
+        .screenshot-frame:hover { border-color: rgba(255,255,255,0.5); transform: translateY(-6px); }
+        .screenshot-frame:hover .screenshot-image { filter: grayscale(0) contrast(1.2); }
+        .screenshot-number { font-size: 12px; color: #666; font-weight: 600; background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 4px; }
+        .project-divider { margin-top: 100px; display: flex; justify-content: center; }
+        .divider-line { width: 220px; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); }
+        .tech-stack-section { margin-top: 60px; display: flex; justify-content: center; }
+        .tech-stack-card { max-width: 800px; width: 100%; border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; background: rgba(255,255,255,0.02); padding: 32px; }
+        .tech-stack-title { font-size: 14px; color: #888; font-weight: 700; letter-spacing: 0.2em; margin-bottom: 24px; text-align: center; }
+        .tech-stack-content { display: flex; flex-direction: column; gap: 16px; }
+        .tech-item { display: flex; flex-direction: column; gap: 6px; padding: 12px; border-left: 2px solid rgba(255,255,255,0.1); }
+        .tech-label { font-size: 11px; color: #666; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; }
+        .tech-value { font-size: 16px; color: #ccc; font-weight: 400; line-height: 1.5; }
+        @media (max-width: 640px) {
+          .project-header { text-align: center; margin-left: auto; margin-right: auto; max-width: 90vw; }
+          .titlebar { flex-direction: column; align-items: center; gap: 6px; }
+          .project-title { font-size: 2.25rem; line-height: 1.1; }
+          .project-year { font-size: 1rem; }
+          .project-details { font-size: 16px; }
+          .project-link { font-size: 13px; }
+          .main-display-container { flex-direction: column; align-items: center; gap: 24px; }
+          .main-app-display { justify-content: center; }
+          .app-frame { width: min(92vw, 360px); height: auto; aspect-ratio: 4 / 3; padding: 12px; margin: 0 auto; }
+          .video-frame { width: min(92vw, 280px); height: auto; aspect-ratio: 9 / 19.5; }
+          .screenshots-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; width: 100%; }
+          .screenshot-item { width: 100%; align-items: center; }
+          .screenshot-frame { width: 100%; aspect-ratio: 9 / 16; height: auto; padding: 6px; }
+          .section-label { text-align: center; }
+          .project-divider { margin-top: 60px; }
+          .tech-stack-card { padding: 20px; margin: 0 16px; }
+          .tech-item { padding: 10px; }
+          .tech-value { font-size: 14px; }
+        }
+        @media (min-width: 641px) and (max-width: 1023px) {
+          .project-header { max-width: 90vw; }
+          .main-display-container { flex-direction: column; align-items: center; gap: 32px; }
+          .app-frame { width: 90vw; height: auto; aspect-ratio: 4 / 3; }
+          .video-frame { width: 320px; height: auto; aspect-ratio: 9 / 19.5; }
+          .screenshots-grid { grid-template-columns: repeat(2, 1fr); justify-items: center; }
+          .screenshot-frame { width: 280px; height: auto; aspect-ratio: 9 / 16; }
+        }
+      `}</style>
+    </div>
   );
 }
