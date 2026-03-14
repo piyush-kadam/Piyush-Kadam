@@ -11,15 +11,15 @@ export default function WorkExperience() {
   useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current) return;
-      
+
       const section = sectionRef.current;
       const rect = section.getBoundingClientRect();
       const sectionHeight = section.offsetHeight;
       const windowHeight = window.innerHeight;
-      
+
       const scrollTop = -rect.top;
       const progress = Math.max(0, Math.min(1, scrollTop / (sectionHeight - windowHeight)));
-      
+
       setScrollProgress(progress);
 
       const cards = section.querySelectorAll('[data-experience-card]');
@@ -35,7 +35,7 @@ export default function WorkExperience() {
 
     window.addEventListener("scroll", handleScroll);
     handleScroll();
-    
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -48,7 +48,6 @@ export default function WorkExperience() {
       image: "/polo2.png",
       icon: "https://skillicons.dev/icons?i=flutter"
     },
-    
     {
       title: "7Seers Media",
       role: "Lead Flutter Developer",
@@ -116,10 +115,11 @@ export default function WorkExperience() {
         </div>
 
         <div className="relative z-10 text-center px-4 sm:px-8 md:px-16 max-w-6xl mx-auto pt-32 sm:pt-40 md:pt-40">
-          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-4 leading-tight tracking-tight text-white whitespace-nowrap">
+          {/* FIXED: removed whitespace-nowrap, reduced base font size */}
+          <h1 className="text-2xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-4 leading-tight tracking-tight text-white text-center">
             DESIGN . DEVELOP . DEPLOY
           </h1>
-          <p className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight text-white">
+          <p className="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight text-white">
             Cross Platform Apps
           </p>
           <p className="text-base sm:text-lg md:text-xl text-white mb-12 max-w-2xl mx-auto leading-relaxed font-light">
@@ -143,11 +143,11 @@ export default function WorkExperience() {
       <section ref={sectionRef} className="relative bg-black text-white py-16 md:py-24 lg:py-32 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-20 overflow-hidden">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-16 md:mb-24 text-center">My Journey</h2>
-          
+
           <div className="relative">
             {/* Desktop: Vertical Line in Center */}
             <div className="hidden md:block absolute left-1/2 top-0 -translate-x-1/2 w-1" style={{ height: "100%" }}>
-              <div 
+              <div
                 className="w-full bg-gradient-to-b from-transparent via-white to-transparent"
                 style={{
                   height: `${scrollProgress * 100}%`,
@@ -161,7 +161,7 @@ export default function WorkExperience() {
 
             {/* Mobile: Vertical Line on Left */}
             <div className="md:hidden absolute left-4 top-0 w-1" style={{ height: "100%" }}>
-              <div 
+              <div
                 className="w-full bg-gradient-to-b from-transparent via-white to-transparent"
                 style={{
                   height: `${scrollProgress * 100}%`,
@@ -178,16 +178,16 @@ export default function WorkExperience() {
               {experiences.map((exp, index) => {
                 const isLeft = index % 2 === 0;
                 const isVisible = visibleCards.includes(index);
-                
+
                 return (
-                  <div 
-                    key={index} 
+                  <div
+                    key={index}
                     className="relative"
                     data-experience-card
                   >
                     {/* Mobile Layout */}
                     <div className="md:hidden flex gap-6 pl-12">
-                      <div 
+                      <div
                         className="absolute left-2 top-8 flex-shrink-0"
                         style={{
                           opacity: isVisible ? 1 : 0,
@@ -202,7 +202,7 @@ export default function WorkExperience() {
                         </div>
                       </div>
 
-                      <div 
+                      <div
                         className="flex-1"
                         style={{
                           opacity: isVisible ? 1 : 0,
@@ -213,7 +213,7 @@ export default function WorkExperience() {
                         <div className="relative bg-zinc-900/50 backdrop-blur-sm border border-white/20 p-6 rounded-2xl shadow-2xl overflow-hidden mb-6 group hover:bg-zinc-800/50 hover:border-white/30 transition-all duration-500">
                           <div className="absolute top-0 left-0 right-0 h-1 bg-white"></div>
                           <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                          
+
                           <div className="relative z-10">
                             <div className="flex items-center gap-3 mb-4">
                               <div className="w-12 h-12 rounded-xl shadow-lg overflow-hidden flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
@@ -229,7 +229,7 @@ export default function WorkExperience() {
                           <div className="absolute bottom-0 left-0 w-20 h-20 bg-white/5 rounded-tr-full"></div>
                         </div>
 
-                        <img 
+                        <img
                           src={exp.image}
                           alt={exp.title}
                           className="w-full shadow-2xl object-contain rounded-lg"
@@ -241,7 +241,7 @@ export default function WorkExperience() {
                     <div className="hidden md:flex items-center justify-between gap-8 lg:gap-16">
                       {isLeft ? (
                         <>
-                          <div 
+                          <div
                             className="flex-1 text-left"
                             style={{
                               opacity: isVisible ? 1 : 0,
@@ -253,7 +253,7 @@ export default function WorkExperience() {
                             <div className="relative inline-block bg-zinc-900/50 backdrop-blur-sm border border-white/20 p-6 lg:p-8 rounded-2xl shadow-2xl max-w-md overflow-hidden group hover:bg-zinc-800/50 hover:border-white/30 transition-all duration-500">
                               <div className="absolute top-0 left-0 right-0 h-1 bg-white"></div>
                               <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                              
+
                               <div className="relative z-10">
                                 <div className="flex items-center gap-3 lg:gap-4 mb-4 lg:mb-5">
                                   <div className="w-12 h-12 lg:w-14 lg:h-14 rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
@@ -284,8 +284,8 @@ export default function WorkExperience() {
                               <div className="absolute bottom-0 left-0 w-20 h-20 bg-white/5 rounded-tr-full"></div>
                             </div>
                           </div>
-                          
-                          <div 
+
+                          <div
                             className="relative z-10 flex-shrink-0"
                             style={{
                               opacity: isVisible ? 1 : 0,
@@ -301,7 +301,7 @@ export default function WorkExperience() {
                             </div>
                           </div>
 
-                          <div 
+                          <div
                             className="flex-1"
                             style={{
                               opacity: isVisible ? 1 : 0,
@@ -310,7 +310,7 @@ export default function WorkExperience() {
                               transitionDelay: '0.2s'
                             }}
                           >
-                            <img 
+                            <img
                               src={exp.image}
                               alt={exp.title}
                               className="w-full max-w-sm shadow-2xl object-contain hover:scale-105 transition-transform duration-300 rounded-lg"
@@ -319,7 +319,7 @@ export default function WorkExperience() {
                         </>
                       ) : (
                         <>
-                          <div 
+                          <div
                             className="flex-1 flex justify-end"
                             style={{
                               opacity: isVisible ? 1 : 0,
@@ -328,14 +328,14 @@ export default function WorkExperience() {
                               transitionDelay: '0.2s'
                             }}
                           >
-                            <img 
+                            <img
                               src={exp.image}
                               alt={exp.title}
                               className="w-full max-w-sm shadow-2xl object-contain hover:scale-105 transition-transform duration-300 rounded-lg"
                             />
                           </div>
-                          
-                          <div 
+
+                          <div
                             className="relative z-10 flex-shrink-0"
                             style={{
                               opacity: isVisible ? 1 : 0,
@@ -351,7 +351,7 @@ export default function WorkExperience() {
                             </div>
                           </div>
 
-                          <div 
+                          <div
                             className="flex-1 text-left"
                             style={{
                               opacity: isVisible ? 1 : 0,
@@ -363,7 +363,7 @@ export default function WorkExperience() {
                             <div className="relative inline-block bg-zinc-900/50 backdrop-blur-sm border border-white/20 p-6 lg:p-8 rounded-2xl shadow-2xl max-w-md overflow-hidden group hover:bg-zinc-800/50 hover:border-white/30 transition-all duration-500">
                               <div className="absolute top-0 left-0 right-0 h-1 bg-white"></div>
                               <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                              
+
                               <div className="relative z-10">
                                 <div className="flex items-center gap-3 lg:gap-4 mb-4 lg:mb-5">
                                   <div className="w-10 h-10 lg:w-12 lg:h-12 bg-white rounded-xl p-2 lg:p-2.5 shadow-lg group-hover:scale-110 transition-transform duration-300">
@@ -395,17 +395,17 @@ export default function WorkExperience() {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-center">Skills & Technologies</h2>
           <p className="text-sm sm:text-base text-gray-400 mb-12 md:mb-16 text-center max-w-2xl mx-auto px-4">
-            Technologies and tools I've mastered throughout my journey
+            Technologies and tools I&apos;ve mastered throughout my journey
           </p>
-          
+
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8">
             {skills.map((skill) => (
-              <div 
+              <div
                 key={skill.name}
                 className="flex flex-col items-center gap-2 sm:gap-3 group"
               >
-                <div className="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 bg-white rounded-lg p-2.5 sm:p-3 transition-transform group-hover:scale-110">
-                  <img 
+                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-20 md:h-20 bg-white rounded-lg p-2.5 sm:p-3 transition-transform group-hover:scale-110">
+                  <img
                     src={`https://skillicons.dev/icons?i=${skill.icon}`}
                     alt={skill.name}
                     className="w-full h-full object-contain"

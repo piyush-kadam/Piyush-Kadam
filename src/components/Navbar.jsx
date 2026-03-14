@@ -3,10 +3,9 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { Great_Vibes } from "next/font/google";
+import { Poppins } from "next/font/google";
 
-// Import Great Vibes font
-const greatVibes = Great_Vibes({ subsets: ["latin"], weight: "400" });
+const poppins = Poppins({ subsets: ["latin"], weight: ["700"] });
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -86,7 +85,7 @@ export default function Navbar() {
             }`}
           >
             <img
-              src="/flutter.jpg" // Place your image in public folder
+              src="/flutter.jpg"
               alt="Navigation Icon"
               className="absolute inset-0 w-full h-full object-cover rounded-xl sm:rounded-2xl drop-shadow-sm"
             />
@@ -99,12 +98,12 @@ export default function Navbar() {
             }`}
           >
             <nav className="px-3 sm:px-8 lg:px-10 py-3 sm:py-4 flex justify-between items-center min-h-[3rem] sm:min-h-[3.5rem]">
-              
-              {/* Brand with Great Vibes */}
-             <Link
-  href="/"
-  className={`text-xl sm:text-2xl lg:text-3xl tracking-wide text-white hover:text-gray-300 transition flex-shrink-0 font-bold ${greatVibes.className}`}
->
+
+              {/* Brand with Poppins */}
+              <Link
+                href="/"
+                className={`text-xl sm:text-2xl lg:text-3xl tracking-wide text-white hover:text-gray-300 transition flex-shrink-0 font-bold ${poppins.className}`}
+              >
                 Piyush
               </Link>
 
@@ -142,7 +141,7 @@ export default function Navbar() {
                 ))}
               </div>
 
-              {/* Start a Project Button stays as is */}
+              {/* Connect Button */}
               <Link
                 href="/contact"
                 className="bg-white text-black px-3 sm:px-4 lg:px-5 py-2 rounded-full font-medium text-xs sm:text-sm lg:text-base hover:bg-gray-200 hover:scale-105 active:scale-95 transition-transform duration-200 flex-shrink-0 whitespace-nowrap"
