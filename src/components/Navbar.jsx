@@ -102,7 +102,7 @@ export default function Navbar() {
               {/* Brand with Poppins */}
               <Link
                 href="/"
-                className={`text-xl sm:text-2xl lg:text-3xl tracking-wide text-white hover:text-gray-300 transition flex-shrink-0 font-bold ${poppins.className}`}
+                className={`text-base sm:text-lg lg:text-xl tracking-wide text-white hover:text-gray-300 transition flex-shrink-0 font-bold ${poppins.className}`}
               >
                 Piyush
               </Link>

@@ -33,6 +33,36 @@ export default function PortfolioPage() {
               <h3 className="text-3xl font-bold mb-6 text-white">Experience</h3>
               
               <div className="space-y-8">
+
+                {/* MelodAI / WorkState */}
+                <div>
+                  <div className="mb-3">
+                    <h4 className="text-2xl font-bold text-white">MelodAI</h4>
+                    <p className="text-white/70 text-base">Full Stack Developer</p>
+                  </div>
+                  
+                  <div className="space-y-3 mb-4">
+                    <div className="bg-white/5 border border-white/20 p-4 rounded-lg">
+                      <h5 className="font-bold text-base mb-1">MelodAI - AI Music Generator</h5>
+                      <p className="text-white/60 text-sm">Flutter • Firebase • RevenueCat • In-App Subscription • AI Music Generation • AI Cover Creation • Text-to-Song</p>
+                    </div>
+                    
+                    <div className="bg-white/5 border border-white/20 p-4 rounded-lg">
+                      <h5 className="font-bold text-base mb-1">CleverNote - AI Note Taker</h5>
+                      <p className="text-white/60 text-sm">Flutter • Firebase • RevenueCat • Auto Transcription • Smart Summaries • AI Assistant • Multi-format Export</p>
+                    </div>
+
+                    <div className="bg-white/5 border border-white/20 p-4 rounded-lg">
+                      <h5 className="font-bold text-base mb-1">CleanMyPhone - AI Cleaner</h5>
+                      <p className="text-white/60 text-sm">Flutter • Firebase • RevenueCat • Storage Optimization • Private Vault • Contact Management • Water Eject</p>
+                    </div>
+                  </div>
+                  
+                  <p className="text-white/80 text-base leading-relaxed">
+                    Built and shipped three full-scale AI-powered iOS apps — an AI music generator, an AI note-taking platform, and an iPhone cleaning utility — each featuring in-app subscriptions, push notifications, and multiple authentication methods including Apple Sign-In and Google Sign-In.
+                  </p>
+                </div>
+
                 {/* 7Seers */}
                 <div>
                   <div className="mb-3">
@@ -47,7 +77,7 @@ export default function PortfolioPage() {
                     </div>
                     
                     <div className="bg-white/5 border border-white/20 p-4 rounded-lg">
-                      <h5 className="font-bold text-base mb-1">Terran -Event App</h5>
+                      <h5 className="font-bold text-base mb-1">Terran - Event App</h5>
                       <p className="text-white/60 text-sm">Apple Sign-in • Advanced UI/UX • Real-time Updates</p>
                     </div>
                   </div>
@@ -82,15 +112,6 @@ export default function PortfolioPage() {
                   </p>
                 </div>
               </div>
-            </div>
-
-           
-
-            {/* Connect */}
-            <div>
-              <p className="text-white/60 text-base leading-relaxed">
-                Let's connect if you're working on projects related to mobile development, automation, or full-stack solutions.
-              </p>
             </div>
           </div>
 
