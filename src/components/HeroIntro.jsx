@@ -12,6 +12,7 @@ const VIDEO_URLS = [
 ];
 
 const IMAGE_URLS = [
+  "/wallpaper.png",
   "/melodai.png", "/clevernotee.png", "/cleanmyphone.png", "/potatobook.png",
   "/appliedplus.png", "/tixoo.png", "/shoehive.png",
   "/M1.PNG", "/M2.png", "/M3.png", "/M4.png",

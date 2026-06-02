@@ -25,7 +25,11 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-html, body { overflow-x: hidden; }
+html, body {
+  overflow-x: clip;
+  max-width: 100%;
+  position: relative;
+}
 .fade-in {
   animation: fadeIn 1.5s ease-in forwards;
 }
@@ -137,7 +141,7 @@ html, body { overflow-x: hidden; }
   .video-frame { width: min(92vw, 280px); height: auto; aspect-ratio: 9 / 19.5; }
   .screenshots-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; width: 100%; }
   .screenshot-item { width: 100%; align-items: center; }
-  .screenshot-frame { width: 100%; aspect-ratio: 9 / 16; height: auto; padding: 6px; }
+  .screenshot-frame { width: 100%; aspect-ratio: 9 / 16; height: auto; padding: 6px; margin-right: 0; }
   .section-label { text-align: center; }
   .project-divider { margin-top: 60px; }
   .tech-stack-card { padding: 20px; margin: 0 16px; }
