@@ -74,7 +74,7 @@ export default function Navbar() {
         onClick={shouldShowIcon ? toggleMenu : undefined}
       >
         <div
-          className={`relative w-full h-full transition-all duration-1000 ease-in-out bg-black border border-white/30 shadow-2xl ${
+          className={`relative w-full h-full transition-all duration-1000 ease-in-out bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl shadow-black/40 ring-1 ring-white/5 ${
             shouldShowIcon ? "rounded-xl sm:rounded-2xl" : "rounded-3xl sm:rounded-full"
           }`}
         >

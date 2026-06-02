@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Dither from '@/components/Dither';
 
 export default function WorkExperience() {
   const sectionRef = useRef(null);
@@ -100,28 +99,17 @@ export default function WorkExperience() {
   return (
     <div className="overflow-x-hidden">
       {/* Intro Section */}
-      <section className="min-h-screen bg-black text-white flex items-center justify-center relative overflow-hidden">
-        <div style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }}>
-          <Dither
-            waveColor={[0.5, 0.5, 0.5]}
-            disableAnimation={false}
-            enableMouseInteraction={true}
-            mouseRadius={0.3}
-            colorNum={4}
-            waveAmplitude={0.3}
-            waveFrequency={3}
-            waveSpeed={0.05}
-          />
-        </div>
+      <section className="min-h-screen bg-black text-white flex items-start justify-center relative overflow-hidden pt-32 sm:pt-40 md:pt-48">
+        <img
+          src="/wallpaper.png"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+        />
 
-        <div className="relative z-10 text-center px-4 sm:px-8 md:px-16 max-w-6xl mx-auto pt-32 sm:pt-40 md:pt-40">
-          {/* FIXED: removed whitespace-nowrap, reduced base font size */}
-          <h1 className="text-2xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-4 leading-tight tracking-tight text-white text-center">
+        <div className="relative z-10 text-center px-4 sm:px-8 md:px-16 max-w-6xl mx-auto">
+          <h1 className="text-base sm:text-3xl md:text-5xl lg:text-6xl font-black mb-4 leading-none tracking-tight text-white text-center whitespace-nowrap">
             DESIGN . DEVELOP . DEPLOY
           </h1>
-          <p className="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight text-white">
-            Cross Platform Apps
-          </p>
           <p className="text-base sm:text-lg md:text-xl text-white mb-12 max-w-2xl mx-auto leading-relaxed font-light">
             Building high-performance, cross-platform apps with clean UI,
             scalable architecture, and seamless integrations.
@@ -132,7 +120,7 @@ export default function WorkExperience() {
             rel="noopener noreferrer"
             className="inline-block"
           >
-            <button className="bg-white hover:bg-gray-100 text-black font-bold px-10 py-4 text-sm sm:text-base rounded-lg transition-all transform hover:scale-105 tracking-widest uppercase">
+            <button className="bg-transparent border border-white text-white hover:bg-white/10 font-light px-10 py-3 text-sm sm:text-base rounded-full transition-all transform hover:scale-105 tracking-widest uppercase">
               View Resume
             </button>
           </a>
