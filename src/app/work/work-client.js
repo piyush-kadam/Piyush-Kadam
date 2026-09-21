@@ -190,60 +190,24 @@ export default function SimpleSpacePortfolio() {
 
   const projects = [
     {
-      name: "MELOD AI",
-      mainImage: "/melodai.png",
-      video: "https://res.cloudinary.com/dwekh4tpm/video/upload/v1773424654/melodai_ovxiff.mp4",
+      name: "TRACCK",
+      mainImage: "/english/01_home.png",
+      video: null,
       images: [
-        "/M1.PNG", "/M2.png", "/M3.png", "/M4.png",
-        "/M5.png", "/M6.PNG", "/M7.png", "/M8.PNG",
+        "/english/01_home.png", "/english/02_foodscan.png", "/english/03_foodresult.png",
+        "/english/04_foodstat.png", "/english/05_mealplan.png", "/english/07_habits.png",
+        "/english/08_tasks.png", "/english/10_widgets.png",
       ],
-      description: "AN AI MUSIC GENERATOR PLATFORM",
-      details: "MelodAI is an AI music creation app that helps users generate original songs and AI covers in seconds. Users can type lyrics or a simple text prompt, choose from many genres and styles, and receive a polished track with vocals, melody, and instrumentals. The app also supports AI-powered cover creation, letting users transform songs into new voice styles for fun and sharing. MelodAI is designed to be simple, fast, and accessible, even for people with no musical background. It is ideal for content creators, aspiring songwriters, music lovers, and anyone who wants to create, cover, and share music easily.",
-      appLink: "https://apps.apple.com/in/app/melodai-ai-music-generator/id6753100795",
+      description: "ONE APP \u00B7 YOUR WHOLE DAY",
+      details: "Tracck is a life-tracking app that merges three tools into one: habit streaks with daily heatmaps and smart reminders, an AI calorie counter that logs meals and macros from a photo instead of typing, and a task planner with projects and focus sessions. Habits, meals and tasks live as modules of a single Today view, so checking in takes one open instead of three, and users can hide the modules they don\u2019t need. Founded, designed and built by Piyush Kadam.",
+      appLink: "https://apps.apple.com/in/app/tracck-calories-habits-todo/id6778776187",
+      webLink: "https://tracck.app",
       year: "2026",
       techStack: {
         framework: "Flutter , Firebase , RevenueCat",
         database: "Firebase Firestore",
         auth: "Gmail, OTP Auth, Google Sign In, Apple Sign In",
-        technologies: "In-App Subscription, Push Notifications , AI Music Generation (multi-genre) , AI Cover Creation , Text-to-Song Conversion , Customization Options , Social Sharing"
-      }
-    },
-    {
-      name: "CleverNote",
-      mainImage: "/clevernotee.png",
-      video: "https://res.cloudinary.com/dwekh4tpm/video/upload/v1773424681/clevernote_yb1ady.mp4",
-      images: [
-        "/C1.PNG", "/C2.PNG", "/CN3.png", "/CN4.png",
-        "/C5.PNG", "/C6.PNG", "/C7.PNG", "/C8.PNG",
-      ],
-      description: "Every meeting, perfectly remembered.",
-      details: "CleverNote is an AI-powered note-taking app that transforms audio, video, PDFs, and YouTube links into structured, searchable notes. It offers automatic transcription, smart summaries, and extracts key highlights and action items. An interactive AI assistant lets you query your notes, rewrite content, or generate scripts. With auto-categorization, full-text search, and multi-format export, it's ideal for students, professionals, content creators, and researchers.",
-      appLink: "https://apps.apple.com/in/app/clevernote-ai-note-taker/id6753180281",
-      year: "2026",
-      techStack: {
-        framework: "Flutter , Firebase , RevenueCat",
-        database: "Firebase Firestore",
-        auth: "Gmail, OTP Auth, Google Sign In, Apple Sign In",
-        technologies: "In-App Subscription, Push Notifications , Automatic transcription (multi-language) , Smart Summarization, Key Highlights Extraction, Action Items Detection, AI Assistant, Auto-categorization, Full-text Search, Multi-format Export"
-      }
-    },
-    {
-      name: "CleanMyPhone",
-      mainImage: "/cleanmyphone.png",
-      video: "https://res.cloudinary.com/dwekh4tpm/video/upload/v1773424736/cleanmyphone_n3iogg.mp4",
-      images: [
-        "/cm1.PNG", "/cm2.PNG", "/cm3.PNG", "/cm4.PNG",
-        "/cm5.PNG", "/cm6.PNG", "/cm7.PNG", "/cm8.PNG",
-      ],
-      description: "Less clutter. More storage. One tap.",
-      details: "Clean My Phone is an all-in-one iPhone cleaning app that quickly frees up storage and keeps your device organized. It scans your phone and removes duplicate and blurry photos, compresses large videos, clears spam emails in bulk, and merges duplicate contacts. A built-in Private Vault lets you store sensitive files securely, and a Water Eject feature uses sound vibrations to push moisture from your speaker. Simple, fast, and designed for everyday users — just scan, review, and clean.",
-      appLink: "https://apps.apple.com/in/app/clean-my-phone-ai-cleaner/id6759080389",
-      year: "2026",
-      techStack: {
-        framework: "Flutter , Firebase , RevenueCat",
-        database: "Firebase Firestore",
-        auth: "Gmail, OTP Auth, Google Sign In, Apple Sign In",
-        technologies: "In-App Subscription, Push Notifications , Storage Optimization , Mail cleaning , Contact Management , Private Vault , Water Eject"
+        technologies: "In-App Subscription, Push Notifications , AI Photo Calorie Scanning , Macro Tracking , AI Meal Plans , Voice Logging , Habit Streaks & Heatmaps , Task & Project Planner , Focus Sessions , Home Screen Widgets , Share Cards"
       }
     },
     {
@@ -256,6 +220,7 @@ export default function SimpleSpacePortfolio() {
       ],
       description: "AN EXPENSE MANAGEMENT PLATFORM",
       details: "This APP was made for Rachitroo famous YT creator while working as an intern for 7SEERS media",
+      appLink: "https://apps.apple.com/in/app/potato-book/id6754873261",
       year: "2026",
       techStack: {
         framework: "Flutter , Firebase , RevenueCat",
@@ -265,25 +230,10 @@ export default function SimpleSpacePortfolio() {
       }
     },
     {
-      name: "APPLIEDPLUS",
-      mainImage: "/appliedplus.png",
-      video: "/appliedplus.mp4",
-      images: ["/a1.jpeg","/a2.jpeg","/a3.jpeg","/a4.jpeg","/a5.jpeg","/a6.jpeg","/a7.jpeg","/a8.jpeg"],
-      description: "CAREER PLATFORM",
-      details: "Advanced job application system connecting talent with opportunities, developed for LibraryFLow and AppliedPlus ltd",
-      year: "2025",
-      techStack: {
-        framework: "Flutter & Firebase",
-        database: "Firebase Firestore",
-        auth: "Gmail, Google Sign In",
-        technologies: "Selenium, REST APIs"
-      }
-    },
-    {
       name: "TERRAN",
       mainImage: "/tixoo.png",
       video: null,
-      images: ["/t1.jpeg","/t2.jpeg","/t3.jpeg","/t4.jpeg","/t5.jpeg","/t6.jpeg","/t7.jpeg","/t8.jpeg"],
+      images: ["/t1.jpeg", "/t2.jpeg", "/t3.jpeg", "/t4.jpeg", "/t5.jpeg", "/t6.jpeg", "/t7.jpeg", "/t8.jpeg"],
       description: "EVENT MANAGEMENT PLATFORM",
       details: "This App is a property of 7SEERS media , it is developed by piyush kadam working as an intern.",
       year: "2025",
@@ -298,7 +248,7 @@ export default function SimpleSpacePortfolio() {
       name: "SHOEHIVE",
       mainImage: "/shoehive.png",
       video: "/shoehive.mp4",
-      images: ["/s1.jpeg","/s2.jpeg","/s3.jpeg","/s4.jpeg","/s5.jpeg","/s6.jpeg","/s7.jpeg","/s8.jpeg"],
+      images: ["/s1.jpeg", "/s2.jpeg", "/s3.jpeg", "/s4.jpeg", "/s5.jpeg", "/s6.jpeg", "/s7.jpeg", "/s8.jpeg"],
       description: "PREMIUM SHOE MARKETPLACE",
       details: "Next-generation shopping experience with premium shoe collections",
       year: "2025",
@@ -345,16 +295,28 @@ export default function SimpleSpacePortfolio() {
                     </div>
                     <p className="project-description">{project.description}</p>
                     <p className="project-details">{project.details}</p>
-                    {project.appLink && (
-                      <a
-                        href={project.appLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="project-link"
-                      >
-                        View on App Store
-                      </a>
-                    )}
+                    <div className="project-links">
+                      {project.appLink && (
+                        <a
+                          href={project.appLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="project-link"
+                        >
+                          View on App Store
+                        </a>
+                      )}
+                      {project.webLink && (
+                        <a
+                          href={project.webLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="project-link"
+                        >
+                          Visit Website
+                        </a>
+                      )}
+                    </div>
                   </div>
 
                   <div className="project-content">
@@ -489,9 +451,9 @@ export default function SimpleSpacePortfolio() {
           .project-year { font-size: 1.2rem; color: #666; font-weight: 600; }
           .project-description { font-size: 14px; color: #888; font-weight: 600; letter-spacing: 0.2em; margin: 8px 0; }
           .project-details { font-size: 18px; color: #ccc; line-height: 1.5; margin: 0; }
+          .project-links { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 14px; }
           .project-link {
             display: inline-block;
-            margin-top: 14px;
             font-size: 14px;
             color: #ffffff;
             font-weight: 600;
@@ -537,6 +499,7 @@ export default function SimpleSpacePortfolio() {
             .project-year { font-size: 1rem; }
             .project-details { font-size: 16px; }
             .project-link { font-size: 13px; }
+            .project-links { justify-content: center; }
             .main-display-container { flex-direction: column; align-items: center; gap: 24px; }
             .main-app-display { justify-content: center; }
             .app-frame { width: min(92vw, 360px); height: auto; aspect-ratio: 4 / 3; padding: 12px; margin: 0 auto; }
