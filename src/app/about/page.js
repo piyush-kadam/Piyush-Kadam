@@ -28,6 +28,27 @@ export default function PortfolioPage() {
                 We specialize in building clean, scalable, and user-friendly digital experiences that help ideas evolve into impactful products. From intuitive UI/UX design to robust frontend and backend development, WorkState blends creativity with technology to deliver solutions that are both visually compelling and technically sound. Our goal is to create meaningful digital products that not only look great but also perform seamlessly and grow with your vision.</p>
             </div>
 
+            {/* Founder Section - Tracck */}
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <h2 className="text-4xl font-bold">Tracck</h2>
+                <span className="px-4 py-1.5 bg-white text-black text-sm font-bold">FOUNDER</span>
+              </div>
+
+              <a
+                href="https://tracck.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white text-base underline underline-offset-4 decoration-white/40 hover:decoration-white hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.6)] transition-all duration-300"
+              >
+                tracck.app
+              </a>
+
+              <p className="text-white/90 mt-4 text-lg leading-relaxed">
+                Founded, designed and built Tracck &mdash; a life-tracking app that merges three tools into one.
+                Habit streaks with daily heatmaps and smart reminders, an AI calorie counter that logs meals and macros from a photo instead of typing, and a task planner with projects and focus sessions. Habits, meals and tasks live as modules of a single Today view, so checking in takes one open instead of three, and users can hide the modules they don&rsquo;t need. Shipped on iOS with in-app subscriptions, push notifications, home screen widgets and voice logging.</p>
+            </div>
+
             {/* Experience */}
             <div>
               <h3 className="text-3xl font-bold mb-6 text-white">Experience</h3>
