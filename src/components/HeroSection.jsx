@@ -67,11 +67,23 @@ export default function WorkExperience() {
       title: "WorkState",
       role: "Founder",
       roleLink: "https://workstate.in",
+      roleLinkLabel: "workstate.in",
       period: "September 2025 - Present",
       description:
         "Founder of a Digital Media Agency creating production-ready applications with a modern tech stack. Focused on scalable solutions and delivering value to clients through creative and innovative ideas.",
       image: "/polo.png",
       icon: "https://skillicons.dev/icons?i=vercel"
+    },
+    {
+      title: "Tracck",
+      role: "Founder",
+      roleLink: "https://tracck.app",
+      roleLinkLabel: "tracck.app",
+      period: "2026 - Present",
+      description:
+        "Founded, designed and built Tracck \u2014 a life-tracking app that merges three tools into one. Habit streaks with daily heatmaps and smart reminders, an AI calorie counter that logs meals and macros from a photo instead of typing, and a task planner with projects and focus sessions. Habits, meals and tasks live as modules of a single Today view, so checking in takes one open instead of three. Shipped on iOS with in-app subscriptions, push notifications, home screen widgets and voice logging.",
+      image: "/tracck.png",
+      icon: "https://skillicons.dev/icons?i=flutter"
     }
   ];
 
@@ -260,7 +272,7 @@ export default function WorkExperience() {
                                         rel="noopener noreferrer"
                                         className="text-white hover:underline"
                                       >
-                                        workstate.in
+                                        {exp.roleLinkLabel || exp.roleLink}
                                       </a>
                                     </>
                                   )}
