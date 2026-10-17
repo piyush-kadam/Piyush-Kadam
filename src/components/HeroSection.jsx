@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 export default function WorkExperience() {
   const sectionRef = useRef(null);
@@ -112,9 +113,13 @@ export default function WorkExperience() {
     <div className="overflow-x-hidden">
       {/* Intro Section */}
       <section className="min-h-screen bg-black text-white flex items-start justify-center relative overflow-hidden pt-32 sm:pt-40 md:pt-48">
-        <img
-          src="/wallpaper.png"
+        <Image
+          src="/wallpaper.jpg"
           alt=""
+          fill
+          preload
+          unoptimized
+          sizes="100vw"
           className="absolute inset-0 w-full h-full object-cover"
         />
 
@@ -217,7 +222,7 @@ export default function WorkExperience() {
                           <div className="relative z-10">
                             <div className="flex items-center gap-3 mb-4">
                               <div className="w-12 h-12 rounded-xl shadow-lg overflow-hidden flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                                <img src={exp.icon} alt="" className="w-full h-full object-cover" />
+                                <img loading="lazy" src={exp.icon} alt="" className="w-full h-full object-cover" />
                               </div>
                               <h3 className="text-xl sm:text-2xl font-bold text-white">{exp.title}</h3>
                             </div>
@@ -230,6 +235,7 @@ export default function WorkExperience() {
                         </div>
 
                         <img
+                    loading="lazy"
                           src={exp.image}
                           alt={exp.title}
                           className="w-full shadow-2xl object-contain rounded-lg"
@@ -257,7 +263,7 @@ export default function WorkExperience() {
                               <div className="relative z-10">
                                 <div className="flex items-center gap-3 lg:gap-4 mb-4 lg:mb-5">
                                   <div className="w-12 h-12 lg:w-14 lg:h-14 rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden">
-                                    <img src={exp.icon} alt="" className="w-full h-full object-cover" />
+                                    <img loading="lazy" src={exp.icon} alt="" className="w-full h-full object-cover" />
                                   </div>
                                   <h3 className="text-2xl lg:text-3xl font-bold text-white">{exp.title}</h3>
                                 </div>
@@ -311,6 +317,7 @@ export default function WorkExperience() {
                             }}
                           >
                             <img
+                    loading="lazy"
                               src={exp.image}
                               alt={exp.title}
                               className="w-full max-w-sm shadow-2xl object-contain hover:scale-105 transition-transform duration-300 rounded-lg"
@@ -329,6 +336,7 @@ export default function WorkExperience() {
                             }}
                           >
                             <img
+                    loading="lazy"
                               src={exp.image}
                               alt={exp.title}
                               className="w-full max-w-sm shadow-2xl object-contain hover:scale-105 transition-transform duration-300 rounded-lg"
@@ -367,7 +375,7 @@ export default function WorkExperience() {
                               <div className="relative z-10">
                                 <div className="flex items-center gap-3 lg:gap-4 mb-4 lg:mb-5">
                                   <div className="w-10 h-10 lg:w-12 lg:h-12 bg-white rounded-xl p-2 lg:p-2.5 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                                    <img src={exp.icon} alt="" className="w-full h-full invert" />
+                                    <img loading="lazy" src={exp.icon} alt="" className="w-full h-full invert" />
                                   </div>
                                   <h3 className="text-2xl lg:text-3xl font-bold text-white">{exp.title}</h3>
                                 </div>
@@ -406,6 +414,7 @@ export default function WorkExperience() {
               >
                 <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-20 md:h-20 bg-white rounded-lg p-2.5 sm:p-3 transition-transform group-hover:scale-110">
                   <img
+                    loading="lazy"
                     src={`https://skillicons.dev/icons?i=${skill.icon}`}
                     alt={skill.name}
                     className="w-full h-full object-contain"

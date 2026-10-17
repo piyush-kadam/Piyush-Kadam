@@ -2,67 +2,18 @@
 
 import { useEffect, useState } from 'react';
 
-const VIDEO_URLS = [
-  "https://res.cloudinary.com/dwekh4tpm/video/upload/v1773424654/melodai_ovxiff.mp4",
-  "https://res.cloudinary.com/dwekh4tpm/video/upload/v1773424681/clevernote_yb1ady.mp4",
-  "https://res.cloudinary.com/dwekh4tpm/video/upload/v1773424736/cleanmyphone_n3iogg.mp4",
-  "/potato.mp4",
-  "/appliedplus.mp4",
-  "/shoehive.mp4",
-];
-
-const IMAGE_URLS = [
-  "/wallpaper.png",
-  "/melodai.png", "/clevernotee.png", "/cleanmyphone.png", "/potatobook.png",
-  "/appliedplus.png", "/tixoo.png", "/shoehive.png",
-  "/M1.PNG", "/M2.png", "/M3.png", "/M4.png",
-  "/M5.png", "/M6.PNG", "/M7.png", "/M8.PNG",
-  "/C1.PNG", "/C2.PNG", "/CN3.png", "/CN4.png",
-  "/C5.PNG", "/C6.PNG", "/C7.PNG", "/C8.PNG",
-  "/cm1.PNG", "/cm2.PNG", "/cm3.PNG", "/cm4.PNG",
-  "/cm5.PNG", "/cm6.PNG", "/cm7.PNG", "/cm8.PNG",
-  "/p1.jpg", "/p2.jpg", "/p3.PNG", "/p4.jpg",
-  "/p5.jpg", "/p6.PNG", "/p7.jpg", "/p8.jpg",
-  "/a1.jpeg", "/a2.jpeg", "/a3.jpeg", "/a4.jpeg",
-  "/a5.jpeg", "/a6.jpeg", "/a7.jpeg", "/a8.jpeg",
-  "/t1.jpeg", "/t2.jpeg", "/t3.jpeg", "/t4.jpeg",
-  "/t5.jpeg", "/t6.jpeg", "/t7.jpeg", "/t8.jpeg",
-  "/s1.jpeg", "/s2.jpeg", "/s3.jpeg", "/s4.jpeg",
-  "/s5.jpeg", "/s6.jpeg", "/s7.jpeg", "/s8.jpeg",
-  "/flutter.jpg",
-];
-
-function preloadAssets() {
-  IMAGE_URLS.forEach((src) => {
-    const img = new Image();
-    img.src = src;
-  });
-  VIDEO_URLS.forEach((src) => {
-    const vid = document.createElement('video');
-    vid.src = src;
-    vid.preload = 'auto';
-    vid.muted = true;
-  });
-}
-
 export default function IntroScreen({ onComplete, children }) {
   const [step, setStep] = useState(0);
 
-  // ── KEY FIX: initialise as `true` if already seen — no flash ──
-  const [introComplete, setIntroComplete] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return sessionStorage.getItem('introSeen') === 'true';
-    }
-    return false;
-  });
+  const [introComplete, setIntroComplete] = useState(false);
 
   useEffect(() => {
-    preloadAssets();
-
-    // Already seen — skip immediately, no timers needed
-    if (introComplete) {
-      if (onComplete) onComplete();
-      return;
+    if (sessionStorage.getItem('introSeen') === 'true') {
+      const frame = requestAnimationFrame(() => {
+        setIntroComplete(true);
+        if (onComplete) onComplete();
+      });
+      return () => cancelAnimationFrame(frame);
     }
 
     sessionStorage.setItem('introSeen', 'true');
@@ -84,14 +35,10 @@ export default function IntroScreen({ onComplete, children }) {
     return () => timers.forEach((t) => clearTimeout(t));
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Already seen — render children directly, zero overhead
-  if (introComplete) {
-    return <>{children}</>;
-  }
-
   return (
-    // ── z-[200] ensures intro is ABOVE the navbar (z-50) ──
-    <section className="fixed inset-0 z-[200] bg-black text-white flex items-center justify-center px-6 overflow-hidden">
+    <>
+      {children}
+    {!introComplete && <section className="fixed inset-0 z-[200] bg-black text-white flex items-center justify-center px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto text-center relative w-full h-full flex items-center justify-center">
 
         {/* PIYUSH */}
@@ -180,6 +127,7 @@ export default function IntroScreen({ onComplete, children }) {
           introComplete ? 'opacity-100' : 'opacity-0'
         } pointer-events-none`}
       />
-    </section>
+    </section>}
+    </>
   );
 }
